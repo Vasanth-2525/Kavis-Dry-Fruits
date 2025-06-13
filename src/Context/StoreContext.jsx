@@ -58,7 +58,7 @@ export const StoreProvider = ({ children }) => {
       const existing = prevItems.find(
         (item) =>
           item.id === product.id &&
-          item.selectedWeight === product.selectedWeight // Check ID + Weight
+          item.selectedWeight === product.selectedWeight 
       );
 
       if (existing) {

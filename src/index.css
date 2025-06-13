@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #388e3c;
+  --color-green3: #e6fdd6;
+  --color-green2: #a5d6a7;
+  --color-green1: #4caf50;
+  --color-green4: #e8f5e9;
+  --color-Beach: #f9fbe7;
+  --color-Gray: #4e4e4e;
+  --color-HalfWhite: #f1f8e9;
+  --color-White: #ffffff;
+  --color-Black: #ffffff;
+}
+
+/* Ensures SVG scales properly */
+svg {
+  max-width: 100%;
+  height: auto;
+}
+.input {
+   @apply border rounded px-3 py-2 w-full;
+ }

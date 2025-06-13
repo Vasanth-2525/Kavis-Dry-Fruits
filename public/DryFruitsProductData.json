@@ -1,0 +1,3365 @@
+[
+  {
+    "id": 1,
+    "name": "California Almonds",
+    "category": "Nuts",
+    "images": [
+      "/images/Product/p1.png",
+      "/images/Product/p2.png",
+      "/images/Product/p3.png",
+      "/images/Product/p4.png"
+    ],
+    "rating": 4.7,
+    "offer": 10,
+    "description": "California Almonds are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Strengthens bones",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Improves skin health",
+      "Helps in digestion",
+      "Supports weight management",
+      "Good for brain function",
+      "Boosts heart health"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Almonds",
+    "category": "Nuts",
+    "images": [
+      "/images/Product/p2.png",
+      "/images/Product/p3.png",
+      "/images/Product/p4.png",
+      "/images/Product/p5.png"
+    ],
+    "rating": 4.5,
+    "offer": 0,
+    "description": "Almonds are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Supports weight management",
+      "Regulates blood sugar levels",
+      "Helps in digestion",
+      "Rich in antioxidants",
+      "Boosts heart health",
+      "Strengthens bones",
+      "Good for brain function",
+      "Improves skin health"
+    ],
+    "weights": ["250g", "500g", "1000g"],
+    "prices": {
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Cashews",
+    "category": "Nuts",
+    "images": [
+      "/images/Product/p3.png",
+      "/images/Product/p4.png",
+      "/images/Product/p5.png",
+      "/images/Product/p6.png"
+    ],
+    "rating": 4.4,
+    "offer": 20,
+    "description": "Cashews are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Helps in digestion",
+      "Improves skin health",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Good for brain function",
+      "Supports weight management",
+      "Boosts heart health",
+      "Strengthens bones"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Pistachios",
+    "category": "Nuts",
+    "images": [
+      "/images/Product/p4.png",
+      "/images/Product/p5.png",
+      "/images/Product/p6.png",
+      "/images/Product/p7.png"
+    ],
+    "rating": 4.7,
+    "offer": 0,
+    "description": "Pistachios are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Supports weight management",
+      "Regulates blood sugar levels",
+      "Strengthens bones",
+      "Improves skin health",
+      "Good for brain function",
+      "Helps in digestion",
+      "Boosts heart health",
+      "Rich in antioxidants"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Plain Pistachios",
+    "category": "Nuts",
+    "images": [
+      "/images/Product/p5.png",
+      "/images/Product/p6.png",
+      "/images/Product/p7.png",
+      "/images/Product/p8.png"
+    ],
+    "rating": 4.6,
+    "offer": 25,
+    "description": "Plain Pistachios are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Helps in digestion",
+      "Strengthens bones",
+      "Supports weight management",
+      "Improves skin health",
+      "Boosts heart health",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Good for brain function"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Walnuts",
+    "category": "Nuts",
+    "images": [
+      "/images/Product/p6.png",
+      "/images/Product/p7.png",
+      "/images/Product/p8.png",
+      "/images/Product/p1.png"
+    ],
+    "rating": 4.6,
+    "offer": 0,
+    "description": "Walnuts are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Helps in digestion",
+      "Good for brain function",
+      "Boosts heart health",
+      "Regulates blood sugar levels",
+      "Improves skin health",
+      "Supports weight management",
+      "Strengthens bones",
+      "Rich in antioxidants"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Anjeer/Figs",
+    "category": "Dry Fruits",
+    "images": [
+      "/images/Product/p7.png",
+      "/images/Product/p8.png",
+      "/images/Product/p1.png",
+      "/images/Product/p2.png"
+    ],
+    "rating": 4.8,
+    "offer": 30,
+    "description": "Anjeer/Figs are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Rich in antioxidants",
+      "Boosts heart health",
+      "Strengthens bones",
+      "Helps in digestion",
+      "Good for brain function",
+      "Regulates blood sugar levels",
+      "Improves skin health",
+      "Supports weight management"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Black Dates",
+    "category": "Dates",
+    "images": [
+      "/images/Product/p8.png",
+      "/images/Product/p1.png",
+      "/images/Product/p2.png",
+      "/images/Product/p3.png"
+    ],
+    "rating": 4.8,
+    "offer": 0,
+    "description": "Black Dates are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Strengthens bones",
+      "Helps in digestion",
+      "Regulates blood sugar levels",
+      "Supports weight management",
+      "Boosts heart health",
+      "Improves skin health",
+      "Rich in antioxidants",
+      "Good for brain function"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Safawi Dates",
+    "category": "Dates",
+    "images": [
+      "/images/Product/p1.png",
+      "/images/Product/p2.png",
+      "/images/Product/p3.png",
+      "/images/Product/p4.png"
+    ],
+    "rating": 4.6,
+    "offer": 35,
+    "description": "Safawi Dates are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Strengthens bones",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Good for brain function",
+      "Supports weight management",
+      "Boosts heart health",
+      "Helps in digestion",
+      "Improves skin health"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Kimia Dates",
+    "category": "Dates",
+    "images": [
+      "/images/Product/p2.png",
+      "/images/Product/p3.png",
+      "/images/Product/p4.png",
+      "/images/Product/p5.png"
+    ],
+    "rating": 4.7,
+    "offer": 0,
+    "description": "Kimia Dates are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Regulates blood sugar levels",
+      "Rich in antioxidants",
+      "Supports weight management",
+      "Good for brain function",
+      "Boosts heart health",
+      "Improves skin health",
+      "Strengthens bones",
+      "Helps in digestion"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Black Raisins Seed",
+    "category": "Raisins",
+    "images": [
+      "/images/Product/p3.png",
+      "/images/Product/p4.png",
+      "/images/Product/p5.png",
+      "/images/Product/p6.png"
+    ],
+    "rating": 4.4,
+    "offer": 20,
+    "description": "Black Raisins Seed are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Boosts heart health",
+      "Good for brain function",
+      "Rich in antioxidants",
+      "Helps in digestion",
+      "Supports weight management",
+      "Strengthens bones",
+      "Regulates blood sugar levels",
+      "Improves skin health"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Yellow Raisins",
+    "category": "Raisins",
+    "images": [
+      "/images/Product/p4.png",
+      "/images/Product/p5.png",
+      "/images/Product/p6.png",
+      "/images/Product/p7.png"
+    ],
+    "rating": 4.4,
+    "offer": 0,
+    "description": "Yellow Raisins are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Regulates blood sugar levels",
+      "Strengthens bones",
+      "Helps in digestion",
+      "Good for brain function",
+      "Supports weight management",
+      "Boosts heart health",
+      "Rich in antioxidants",
+      "Improves skin health"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Kiwi Green",
+    "category": "Dried Fruits",
+    "images": [
+      "/images/Product/p5.png",
+      "/images/Product/p6.png",
+      "/images/Product/p7.png",
+      "/images/Product/p8.png"
+    ],
+    "rating": 4.6,
+    "offer": 30,
+    "description": "Kiwi Green are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Boosts heart health",
+      "Rich in antioxidants",
+      "Improves skin health",
+      "Good for brain function",
+      "Regulates blood sugar levels",
+      "Helps in digestion",
+      "Supports weight management",
+      "Strengthens bones"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Almond Gum",
+    "category": "Ayurvedic",
+    "images": [
+      "/images/Product/p6.png",
+      "/images/Product/p7.png",
+      "/images/Product/p8.png",
+      "/images/Product/p1.png"
+    ],
+    "rating": 4.8,
+    "offer": 0,
+    "description": "Almond Gum are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Supports weight management",
+      "Strengthens bones",
+      "Helps in digestion",
+      "Good for brain function",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Improves skin health",
+      "Boosts heart health"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Flax Seeds",
+    "category": "Seeds",
+    "images": [
+      "/images/Product/p7.png",
+      "/images/Product/p8.png",
+      "/images/Product/p1.png",
+      "/images/Product/p2.png"
+    ],
+    "rating": 4.9,
+    "offer": 25,
+    "description": "Flax Seeds are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Boosts heart health",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Supports weight management",
+      "Helps in digestion",
+      "Good for brain function",
+      "Improves skin health",
+      "Strengthens bones"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Pumpkin Seeds",
+    "category": "Seeds",
+    "images": [
+      "/images/Product/p8.png",
+      "/images/Product/p1.png",
+      "/images/Product/p2.png",
+      "/images/Product/p3.png"
+    ],
+    "rating": 4.9,
+    "offer": 0,
+    "description": "Pumpkin Seeds are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Regulates blood sugar levels",
+      "Helps in digestion",
+      "Improves skin health",
+      "Strengthens bones",
+      "Rich in antioxidants",
+      "Good for brain function",
+      "Boosts heart health",
+      "Supports weight management"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Sun Flower Seeds",
+    "category": "Seeds",
+    "images": [
+      "/images/Product/p1.png",
+      "/images/Product/p2.png",
+      "/images/Product/p3.png",
+      "/images/Product/p4.png"
+    ],
+    "rating": 4.8,
+    "offer": 20,
+    "description": "Sun Flower Seeds are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Boosts heart health",
+      "Strengthens bones",
+      "Helps in digestion",
+      "Rich in antioxidants",
+      "Good for brain function",
+      "Supports weight management",
+      "Improves skin health",
+      "Regulates blood sugar levels"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Watermelon Seeds",
+    "category": "Seeds",
+    "images": [
+      "/images/Product/p2.png",
+      "/images/Product/p3.png",
+      "/images/Product/p4.png",
+      "/images/Product/p5.png"
+    ],
+    "rating": 4.7,
+    "offer": 0,
+    "description": "Watermelon Seeds are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Helps in digestion",
+      "Regulates blood sugar levels",
+      "Rich in antioxidants",
+      "Strengthens bones",
+      "Improves skin health",
+      "Supports weight management",
+      "Good for brain function",
+      "Boosts heart health"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Chia Seeds",
+    "category": "Seeds",
+    "images": [
+      "/images/Product/p3.png",
+      "/images/Product/p4.png",
+      "/images/Product/p5.png",
+      "/images/Product/p6.png"
+    ],
+    "rating": 4.7,
+    "offer": 30,
+    "description": "Chia Seeds are premium quality, packed with nutrition and full of natural flavor. Ideal for daily snacking, cooking, or as a healthy gift option. A great choice for those seeking a balanced, nutrient-rich diet.",
+    "health_benefits": [
+      "Improves skin health",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Helps in digestion",
+      "Good for brain function",
+      "Strengthens bones",
+      "Supports weight management",
+      "Boosts heart health"
+    ],
+    "weights": ["100g", "250g", "500g", "1000g"],
+    "prices": {
+      "100g": 159,
+      "250g": 319,
+      "500g": 639,
+      "1000g": 1289
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Healthy Combo Pack 1",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.5,
+    "description": "Healthy Combo Pack 1 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Supports weight management",
+      "Good for brain function",
+      "Strengthens bones",
+      "Boosts heart health",
+      "Regulates blood sugar levels",
+      "Rich in antioxidants",
+      "Helps in digestion",
+      "Improves skin health"
+    ],
+    "weights": ["500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Fastive",
+    "offer": "Free shipping on 500gm and above",
+    "combos": [
+      "Plain Pistachios 250g",
+      "Anjeer/Figs 250g",
+      "Kiwi Green 250g",
+      "Almonds 500g",
+      "Chia Seeds 500g",
+      "Pistachios 250g"
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Healthy Combo Pack 2",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.6,
+    "description": "Healthy Combo Pack 2 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Rich in antioxidants",
+      "Helps in digestion",
+      "Supports weight management",
+      "Regulates blood sugar levels",
+      "Boosts heart health",
+      "Improves skin health",
+      "Strengthens bones",
+      "Good for brain function"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Family",
+    "offer": "Combo Pack: Buy 3, Get 15% Off",
+    "combos": [
+      "Kiwi Green 250g",
+      "Yellow Raisins 250g",
+      "Black Dates 250g",
+      "Cashews 250g"
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Healthy Combo Pack 3",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 3 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Regulates blood sugar levels",
+      "Supports weight management",
+      "Good for brain function",
+      "Rich in antioxidants",
+      "Improves skin health",
+      "Strengthens bones",
+      "Helps in digestion",
+      "Boosts heart health"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Diet",
+    "offer": "10% off on orders above \u20b91000",
+    "combos": [
+      "Pistachios 250g",
+      "California Almonds 500g",
+      "Kiwi Green 500g",
+      "Almond Gum 250g"
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Healthy Combo Pack 4",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 4 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Improves skin health",
+      "Supports weight management",
+      "Regulates blood sugar levels",
+      "Strengthens bones",
+      "Good for brain function",
+      "Rich in antioxidants",
+      "Boosts heart health",
+      "Helps in digestion"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Premium",
+    "offer": "Buy 1 Get 1 Free (Limited Time)",
+    "combos": [
+      "Black Raisins Seed 500g",
+      "Walnuts 250g",
+      "Sun Flower Seeds 500g",
+      "California Almonds 250g",
+      "Almond Gum 500g"
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Healthy Combo Pack 5",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.4,
+    "description": "Healthy Combo Pack 5 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Improves skin health",
+      "Good for brain function",
+      "Rich in antioxidants",
+      "Strengthens bones",
+      "Supports weight management",
+      "Helps in digestion",
+      "Boosts heart health",
+      "Regulates blood sugar levels"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Fastive",
+    "offer": "Buy 1 Get 1 Free (Limited Time)",
+    "combos": [
+      "Almond Gum 500g",
+      "Black Raisins Seed 250g",
+      "Sun Flower Seeds 500g",
+      "Plain Pistachios 500g",
+      "Almonds 500g",
+      "Kiwi Green 500g"
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Healthy Combo Pack 6",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.4,
+    "description": "Healthy Combo Pack 6 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Boosts heart health",
+      "Helps in digestion",
+      "Strengthens bones",
+      "Good for brain function",
+      "Supports weight management",
+      "Improves skin health"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Family",
+    "offer": "10% off on orders above \u20b91000",
+    "combos": [
+      "Kiwi Green 250g",
+      "Watermelon Seeds 500g",
+      "Safawi Dates 250g",
+      "Pistachios 250g",
+      "Yellow Raisins 250g"
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Healthy Combo Pack 7",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 7 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Helps in digestion",
+      "Good for brain function",
+      "Supports weight management",
+      "Boosts heart health",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Improves skin health",
+      "Strengthens bones"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Diet",
+    "offer": "Flat \u20b950 off on prepaid orders",
+    "combos": [
+      "Kimia Dates 500g",
+      "Chia Seeds 500g",
+      "Kiwi Green 250g",
+      "Plain Pistachios 500g",
+      "Almonds 500g"
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Healthy Combo Pack 8",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.6,
+    "description": "Healthy Combo Pack 8 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Improves skin health",
+      "Helps in digestion",
+      "Good for brain function",
+      "Regulates blood sugar levels",
+      "Boosts heart health",
+      "Supports weight management",
+      "Strengthens bones",
+      "Rich in antioxidants"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Premium",
+    "offer": "Buy 1 Get 1 Free (Limited Time)",
+    "combos": [
+      "Chia Seeds 250g",
+      "Anjeer/Figs 250g",
+      "Watermelon Seeds 250g",
+      "California Almonds 500g",
+      "Plain Pistachios 250g",
+      "Black Raisins Seed 500g"
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Healthy Combo Pack 9",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.5,
+    "description": "Healthy Combo Pack 9 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Helps in digestion",
+      "Boosts heart health",
+      "Good for brain function",
+      "Improves skin health",
+      "Supports weight management",
+      "Strengthens bones"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Fastive",
+    "offer": "Free shipping on 500gm and above",
+    "combos": [
+      "Flax Seeds 500g",
+      "Kimia Dates 500g",
+      "Sun Flower Seeds 500g",
+      "Chia Seeds 500g",
+      "Pumpkin Seeds 250g"
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Healthy Combo Pack 10",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 10 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Good for brain function",
+      "Rich in antioxidants",
+      "Boosts heart health",
+      "Improves skin health",
+      "Helps in digestion",
+      "Supports weight management",
+      "Strengthens bones",
+      "Regulates blood sugar levels"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Family",
+    "offer": "Buy 1 Get 1 Free (Limited Time)",
+    "combos": [
+      "Cashews 250g",
+      "Pistachios 250g",
+      "Watermelon Seeds 500g",
+      "Plain Pistachios 500g",
+      "Almonds 250g",
+      "Flax Seeds 250g"
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Healthy Combo Pack 11",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.7,
+    "description": "Healthy Combo Pack 11 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Supports weight management",
+      "Improves skin health",
+      "Rich in antioxidants",
+      "Boosts heart health",
+      "Strengthens bones",
+      "Helps in digestion",
+      "Regulates blood sugar levels",
+      "Good for brain function"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Diet",
+    "offer": "10% off on orders above \u20b91000",
+    "combos": [
+      "Pumpkin Seeds 250g",
+      "Chia Seeds 500g",
+      "Cashews 500g",
+      "Pistachios 250g"
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Healthy Combo Pack 12",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 12 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Strengthens bones",
+      "Boosts heart health",
+      "Helps in digestion",
+      "Supports weight management",
+      "Improves skin health",
+      "Regulates blood sugar levels",
+      "Rich in antioxidants",
+      "Good for brain function"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Premium",
+    "offer": "Flat \u20b950 off on prepaid orders",
+    "combos": [
+      "Yellow Raisins 250g",
+      "Kimia Dates 500g",
+      "Chia Seeds 500g",
+      "Watermelon Seeds 250g",
+      "Plain Pistachios 500g",
+      "Almonds 500g"
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Healthy Combo Pack 13",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.7,
+    "description": "Healthy Combo Pack 13 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Strengthens bones",
+      "Rich in antioxidants",
+      "Helps in digestion",
+      "Improves skin health",
+      "Regulates blood sugar levels",
+      "Boosts heart health",
+      "Good for brain function",
+      "Supports weight management"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Fastive",
+    "offer": "Flat \u20b950 off on prepaid orders",
+    "combos": [
+      "Almonds 250g",
+      "Safawi Dates 250g",
+      "Chia Seeds 250g",
+      "Almond Gum 500g",
+      "Flax Seeds 250g",
+      "Anjeer/Figs 250g"
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Healthy Combo Pack 14",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.7,
+    "description": "Healthy Combo Pack 14 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Boosts heart health",
+      "Regulates blood sugar levels",
+      "Rich in antioxidants",
+      "Improves skin health",
+      "Helps in digestion",
+      "Strengthens bones",
+      "Supports weight management",
+      "Good for brain function"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Family",
+    "offer": "10% off on orders above \u20b91000",
+    "combos": [
+      "Almond Gum 500g",
+      "Plain Pistachios 250g",
+      "Safawi Dates 250g",
+      "Anjeer/Figs 500g"
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Healthy Combo Pack 15",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 15 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Good for brain function",
+      "Regulates blood sugar levels",
+      "Boosts heart health",
+      "Supports weight management",
+      "Helps in digestion",
+      "Strengthens bones",
+      "Rich in antioxidants",
+      "Improves skin health"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Diet",
+    "offer": "Buy 1 Get 1 Free (Limited Time)",
+    "combos": [
+      "Anjeer/Figs 250g",
+      "Kiwi Green 500g",
+      "Cashews 500g",
+      "Chia Seeds 250g"
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Healthy Combo Pack 16",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 16 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Good for brain function",
+      "Helps in digestion",
+      "Strengthens bones",
+      "Boosts heart health",
+      "Improves skin health",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Supports weight management"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Premium",
+    "offer": "10% off on orders above \u20b91000",
+    "combos": [
+      "Chia Seeds 500g",
+      "Almond Gum 500g",
+      "Pistachios 500g",
+      "Kimia Dates 500g"
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Healthy Combo Pack 17",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.6,
+    "description": "Healthy Combo Pack 17 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Helps in digestion",
+      "Improves skin health",
+      "Supports weight management",
+      "Rich in antioxidants",
+      "Boosts heart health",
+      "Strengthens bones",
+      "Regulates blood sugar levels",
+      "Good for brain function"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Fastive",
+    "offer": "Combo Pack: Buy 3, Get 15% Off",
+    "combos": [
+      "Anjeer/Figs 500g",
+      "Cashews 500g",
+      "Almond Gum 250g",
+      "Yellow Raisins 250g"
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Healthy Combo Pack 18",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 18 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Boosts heart health",
+      "Rich in antioxidants",
+      "Improves skin health",
+      "Regulates blood sugar levels",
+      "Good for brain function",
+      "Strengthens bones",
+      "Helps in digestion",
+      "Supports weight management"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Family",
+    "offer": "Flat \u20b950 off on prepaid orders",
+    "combos": [
+      "California Almonds 250g",
+      "Flax Seeds 500g",
+      "Cashews 250g",
+      "Black Dates 500g",
+      "Yellow Raisins 500g"
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Healthy Combo Pack 19",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 19 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Helps in digestion",
+      "Good for brain function",
+      "Improves skin health",
+      "Boosts heart health",
+      "Rich in antioxidants",
+      "Strengthens bones",
+      "Regulates blood sugar levels",
+      "Supports weight management"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Diet",
+    "offer": "Buy 1 Get 1 Free (Limited Time)",
+    "combos": [
+      "Anjeer/Figs 500g",
+      "Watermelon Seeds 250g",
+      "Kimia Dates 250g",
+      "Almond Gum 500g",
+      "Kiwi Green 500g",
+      "California Almonds 500g"
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Healthy Combo Pack 20",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.7,
+    "description": "Healthy Combo Pack 20 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Supports weight management",
+      "Good for brain function",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Strengthens bones",
+      "Boosts heart health",
+      "Improves skin health",
+      "Helps in digestion"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Premium",
+    "offer": "Free shipping on 500gm and above",
+    "combos": [
+      "Almond Gum 250g",
+      "Plain Pistachios 500g",
+      "Pistachios 250g",
+      "Almonds 250g",
+      "Chia Seeds 250g"
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Healthy Combo Pack 21",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.6,
+    "description": "Healthy Combo Pack 21 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Good for brain function",
+      "Supports weight management",
+      "Helps in digestion",
+      "Regulates blood sugar levels",
+      "Strengthens bones",
+      "Rich in antioxidants",
+      "Boosts heart health",
+      "Improves skin health"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Fastive",
+    "offer": "Flat \u20b950 off on prepaid orders",
+    "combos": [
+      "Sun Flower Seeds 500g",
+      "Yellow Raisins 500g",
+      "Plain Pistachios 250g",
+      "Black Dates 500g",
+      "Almonds 500g",
+      "Almond Gum 500g"
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Healthy Combo Pack 22",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.6,
+    "description": "Healthy Combo Pack 22 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Regulates blood sugar levels",
+      "Helps in digestion",
+      "Good for brain function",
+      "Boosts heart health",
+      "Strengthens bones",
+      "Improves skin health",
+      "Rich in antioxidants",
+      "Supports weight management"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Family",
+    "offer": "Combo Pack: Buy 3, Get 15% Off",
+    "combos": [
+      "Kimia Dates 250g",
+      "California Almonds 500g",
+      "Plain Pistachios 250g",
+      "Pumpkin Seeds 500g",
+      "Kiwi Green 500g"
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Healthy Combo Pack 23",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.8,
+    "description": "Healthy Combo Pack 23 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Improves skin health",
+      "Boosts heart health",
+      "Helps in digestion",
+      "Supports weight management",
+      "Strengthens bones",
+      "Rich in antioxidants",
+      "Good for brain function",
+      "Regulates blood sugar levels"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Diet",
+    "offer": "Buy 1 Get 1 Free (Limited Time)",
+    "combos": [
+      "Pistachios 250g",
+      "Pumpkin Seeds 500g",
+      "Black Dates 250g",
+      "California Almonds 500g"
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Healthy Combo Pack 24",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.7,
+    "description": "Healthy Combo Pack 24 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Strengthens bones",
+      "Supports weight management",
+      "Rich in antioxidants",
+      "Boosts heart health",
+      "Helps in digestion",
+      "Improves skin health",
+      "Regulates blood sugar levels",
+      "Good for brain function"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Premium",
+    "offer": "10% off on orders above \u20b91000",
+    "combos": [
+      "Kimia Dates 250g",
+      "Black Raisins Seed 250g",
+      "Pumpkin Seeds 250g",
+      "Almond Gum 500g",
+      "Walnuts 250g",
+      "California Almonds 250g"
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Healthy Combo Pack 25",
+    "category": "Combo",
+    "images": [
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png",
+      "/images/combo.png"
+    ],
+    "rating": 4.7,
+    "description": "Healthy Combo Pack 25 includes a selection of nutritious dry fruits and seeds. Great for gifting or daily health needs.",
+    "health_benefits": [
+      "Helps in digestion",
+      "Strengthens bones",
+      "Supports weight management",
+      "Rich in antioxidants",
+      "Regulates blood sugar levels",
+      "Improves skin health",
+      "Good for brain function",
+      "Boosts heart health"
+    ],
+    "weights": [" 500, 1000"],
+    "prices": {
+      "500g": 1007,
+      "1000g": 2014
+    },
+    "reviews": [
+      {
+        "user": "Anita Rao",
+        "comment": "Fresh and tasty! The packaging was neat, and the flavor was just right—perfect for a healthy snack break.",
+        "date": "2025-04-20"
+      },
+      {
+        "user": "Rahul Mehta",
+        "comment": "Great quality and packing. The product arrived intact and fresh, and I could tell it was made with care and high standards.",
+        "date": "2025-04-23"
+      },
+      {
+        "user": "Deepika Sharma",
+        "comment": "Good for health and energy. I’ve been including it in my morning routine, and it really gives a natural energy boost without any additives.",
+        "date": "2025-03-18"
+      },
+      {
+        "user": "Vikram Jain",
+        "comment": "Excellent value for money. You get a premium quality product at an affordable price—will definitely buy again.",
+        "date": "2025-04-19"
+      },
+      {
+        "user": "Sonal Verma",
+        "comment": "Highly recommended. I shared it with my family and everyone loved it! It's rare to find something healthy and delicious together.",
+        "date": "2025-04-16"
+      },
+      {
+        "user": "Rakesh Nair",
+        "comment": "A healthy snack option. I replaced my evening chips with this and it’s been a great change—tastes great and guilt-free!",
+        "date": "2025-03-22"
+      },
+      {
+        "user": "Kavya Menon",
+        "comment": "Rich in taste and nutrients. I’m impressed with how flavorful it is while still being packed with nutrition—ideal for fitness enthusiasts.",
+        "date": "2025-03-21"
+      },
+      {
+        "user": "Manoj Pillai",
+        "comment": "Very satisfied with the purchase. Fast delivery, great taste, and excellent texture. Will surely recommend to friends and family.",
+        "date": "2025-03-16"
+      }
+    ],
+    "type": "Fastive",
+    "offer": "Buy 1 Get 1 Free (Limited Time)",
+    "combos": [
+      "Kimia Dates 250g",
+      "Sun Flower Seeds 250g",
+      "Watermelon Seeds 250g",
+      "Black Raisins Seed 250g",
+      "Cashews 500g",
+      "Almonds 500g"
+    ]
+  }
+]

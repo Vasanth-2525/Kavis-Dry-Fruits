@@ -10,8 +10,8 @@ import PageNavigation from "../Component/PageNavigation";
 import OfferBanner from "../Home/OfferBanner";
 import FestiveGiftPack from "../Home/FestiveGiftPack";
 import Services from "../Home/Services";
-import { toast } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const categories = [
   "Nuts",
@@ -247,30 +247,36 @@ const Category = () => {
                     key={product.id}
                     className="group bg-white rounded-2xl p-4 shadow hover:ring-2 hover:ring-green1 transition relative"
                   >
-                    <div className="absolute top-7 left-4 bg-green1 text-white text-xs px-3 py-1 rounded-r-full">
-                      Bestseller
-                    </div>
-                    <div
-                      onClick={() =>{
-                        addToFavorites({
-                          ...product,
-                          qty: 1,
-                          selectedWeight: activeWeight,
-                          price: offerPrice,
-                          img: product.images?.[0] ?? "",
-                        });
-                        toast.success("Product Added To Favorite")
-                      }}
-                      className="absolute top-6 right-6 text-green1 border border-green1 p-2 rounded-full text-xl hover:bg-green1 hover:text-white cursor-pointer"
-                    >
-                      <FiHeart />
-                    </div>
-                    <div className="border-2 border-dotted border-green1 rounded-2xl">
-                      <img
-                        src={product.images?.[0] ?? ""}
-                        alt={product.name}
-                        className="w-full h-56 object-contain p-4 mb-4"
-                      />
+                    <div className="relative h-60 flex items-center justify-center border-2 border-dashed border-primary rounded-md overflow-hidden">
+                      <Link to={`/shop/${product.id}`}>
+                        <img
+                          src={
+                            product.images && product.images.length > 0
+                              ? product.images[0]
+                              : ""
+                          }
+                          alt={product.name}
+                          className="w-full h-full p-3 object-contain transition-transform duration-700 transform hover:rotate-y-180"
+                        />
+                      </Link>
+                      <span className="absolute top-2 left-0 bg-primary text-white text-xs px-3 py-1 rounded-r-full shadow">
+                        Bestseller
+                      </span>
+                      <button
+                        onClick={() => {
+                          addToFavorites({
+                            ...product,
+                            qty: 1,
+                            selectedWeight: activeWeight,
+                            price: offerPrice,
+                            img: product.images[0],
+                          });
+                          toast.success("Product Added To Favorite");
+                        }}
+                        className={`absolute top-2 right-2 border p-2 rounded-full group-hover:text-white group-hover:bg-primary`}
+                      >
+                        <FiHeart />
+                      </button>
                     </div>
                     <Link
                       to={`/shop/${product.id}`}
@@ -294,7 +300,7 @@ const Category = () => {
                             price: offerPrice,
                             img: product.images?.[0] ?? "",
                           });
-                          toast.success("Product Added Successfully"); 
+                          toast.success("Product Added Successfully");
                         }}
                         className="bg-green1 text-white w-1/2 py-2 rounded-md text-xl flex justify-center items-center hover:bg-green2 transition"
                       >

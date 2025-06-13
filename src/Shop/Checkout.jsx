@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useStore } from "../Context/StoreContext";
 import PageHeader from "../Component/PageHeader";
 import { useNavigate, useLocation } from "react-router-dom";
-import emailjs from "emailjs-com"; 
+import emailjs from "emailjs-com";
 
 const Checkout = () => {
   const { cartItems: storeCartItems, setCartItems } = useStore();
@@ -142,10 +142,10 @@ const Checkout = () => {
 
     emailjs
       .send(
-        "service_a6grxsl", 
-        "template_cmt9s1t", 
+        "service_a6grxsl",
+        "template_cmt9s1t",
         templateParams,
-        "isAR5Sy8Y4PABFBmC" 
+        "isAR5Sy8Y4PABFBmC"
       )
       .then(
         (result) => {
@@ -187,8 +187,10 @@ const Checkout = () => {
       name: "STARTUP_PROJECTS",
       description: "Order Payment",
       handler: function () {
-        setCartItems([]);
-        sendInvoiceEmail(orderData); 
+        if (!checkoutProduct) {
+          setCartItems([]);
+        }
+        sendInvoiceEmail(orderData);
         navigate("/account", { state: { goToOrders: true } });
       },
       prefill: {
@@ -466,7 +468,7 @@ const Checkout = () => {
           </button>
         </form>
 
-        <div className="border border-green-500 rounded-xl p-6 bg-white shadow-sm h-fit">
+        <div className="border border-green-500 rounded-xl p-6 bg-white shadow-sm h-fit sticky top-4">
           <h3 className="text-xl font-bold mb-4">Order Summary</h3>
           <div className="space-y-2 text-sm font-medium">
             <div className="flex justify-between">

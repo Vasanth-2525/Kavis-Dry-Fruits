@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaPrint } from "react-icons/fa";
+import { RiDeleteBinLine } from "react-icons/ri";
 import PageHeader from "../Component/PageHeader";
 import Services from "../Home/Services";
 import { useLocation } from "react-router-dom";
@@ -123,6 +124,14 @@ const Account = () => {
     alert("Password updated!");
   };
 
+  const removerOrder = (productId) => {
+    const updatedOrders = allOrders.filter(
+      (item) => item.orderId !== productId
+    );
+    setAllOrders(updatedOrders);
+    localStorage.setItem(`${username}_orders`, JSON.stringify(updatedOrders));
+  };
+
   const handlePrint = (order, e) => {
     e.stopPropagation();
     const printWindow = window.open("", "", "width=800,height=600");
@@ -199,7 +208,7 @@ const Account = () => {
 
   <footer>Printed on: ${new Date().toLocaleString()}</footer>
 </body>
-</html>`
+</html>`;
 
     printWindow.document.write(content);
     printWindow.document.close();
@@ -307,7 +316,6 @@ const Account = () => {
                   key={index}
                   className="max-w-4xl mx-auto shadow-md mb-6 rounded-lg overflow-hidden border border-yellow-300"
                 >
-                  {/* Header Section */}
                   <div
                     className="bg-yellow-400 md:flex-row flex-col flex justify-between items-center px-6 py-4 cursor-pointer"
                     onClick={() =>
@@ -326,9 +334,17 @@ const Account = () => {
                     <div className="flex items-center gap-3">
                       <button
                         onClick={(e) => handlePrint(order, e)}
-                        className="bg-green-600 hover:bg-green-700 text-white text-sm px-6 py-3 rounded"
+                        className="flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white text-sm px-6 py-3 rounded"
                       >
-                        Download Invoice
+                        <FaPrint /> Invoice
+                      </button>
+
+                      {/* ✅ Fix applied here */}
+                      <button
+                        onClick={() => removerOrder(order.orderId)}
+                        className="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-3.5 rounded"
+                      >
+                        <RiDeleteBinLine />
                       </button>
                     </div>
                   </div>

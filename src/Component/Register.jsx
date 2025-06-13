@@ -110,7 +110,7 @@ const Register = () => {
         <div className="w-full md:w-1/2 p-8 overflow-y-auto">
           <div className="mb-6">
             <img
-              src="s/images/Kavi_logo.png"
+              src="/images/Kavi_logo.png"
               alt="Logo"
               className="w-20 h-auto mb-2"
             />

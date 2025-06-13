@@ -8,8 +8,8 @@ import PageNavigation from "../Component/PageNavigation";
 import { Link } from "react-router-dom";
 import { useStore } from "../Context/StoreContext";
 import NewArrived from "../Home/NewArrived";
-import { toast } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const categories = [
   "All",
@@ -43,18 +43,13 @@ const Shop = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { addToFavorites, addToCart } = useStore();
+  const { addToFavorites, addToCart, favorites } = useStore();
 
   useEffect(() => {
     fetch("/DryFruitsProductData.json")
-      .then((res) => {
-        if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-
-        // Safely calculate all available prices
         const prices = data.flatMap((p) =>
           p?.prices && typeof p.prices === "object"
             ? Object.values(p.prices).filter((v) => typeof v === "number")
@@ -63,9 +58,9 @@ const Shop = () => {
         const max = prices.length ? Math.max(...prices) : 0;
         setPriceRange([0, max]);
       })
-      .catch((err) => {
-        console.error("Error loading DryFruitsProductData.json:", err);
-      });
+      .catch((err) =>
+        console.error("Error loading DryFruitsProductData.json:", err)
+      );
   }, []);
 
   const safePrices = products.flatMap((p) =>
@@ -87,27 +82,19 @@ const Shop = () => {
 
   const filteredProducts = products.filter((p) => {
     if (!p.prices || typeof p.prices !== "object") return false;
-
     const matchCategory =
       selectedCategory === "All" || p.category === selectedCategory;
-
     const weightToUse =
       selectedWeight !== "All" ? selectedWeight : p.weights[0];
-
     const price = p.prices[weightToUse];
     if (typeof price !== "number") return false;
-
     const matchWeight =
       selectedWeight === "All" || p.weights.includes(selectedWeight);
-
     const matchRating = selectedRating === 0 || p.rating >= selectedRating;
-
     const matchTag =
       selectedTag === "All" ||
       (Array.isArray(p.tags) && p.tags.includes(selectedTag));
-
     const matchPrice = price >= priceRange[0] && price <= priceRange[1];
-
     return (
       matchCategory && matchWeight && matchRating && matchTag && matchPrice
     );
@@ -172,7 +159,7 @@ const Shop = () => {
               />
             </div>
 
-            {/* Filters */}
+            {/* Dynamic Filters */}
             {[
               ["Category", categories, selectedCategory, setSelectedCategory],
               ["Weight", weights, selectedWeight, setSelectedWeight],
@@ -228,6 +215,7 @@ const Shop = () => {
           </aside>
         )}
 
+        {/* Products Grid */}
         <main className="md:col-span-3">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedProducts.length === 0 ? (
@@ -247,34 +235,46 @@ const Shop = () => {
 
                 return (
                   <div
-                    key={product.id}
+                    key={`${product.id}-${activeWeight}`}
                     className="group bg-white rounded-2xl p-4 shadow hover:ring-2 hover:ring-green1 transition relative"
                   >
-                    <div className="absolute top-7 left-4 bg-green1 text-white text-xs px-3 py-1 rounded-r-full">
-                      Bestseller
+                    {/* Product Image */}
+                    <div className="relative h-60 flex items-center justify-center border-2 border-dashed border-primary rounded-md overflow-hidden">
+                      <Link to={`/shop/${product.id}`}>
+                        <img
+                          src={
+                            product.images && product.images.length > 0
+                              ? product.images[0]
+                              : ""
+                          }
+                          alt={product.name}
+                          className="w-full h-full p-3 object-contain transition-transform duration-700 transform hover:rotate-y-180"
+                        />
+                      </Link>
+                      <span className="absolute top-2 left-0 bg-primary text-white text-xs px-3 py-1 rounded-r-full shadow">
+                        Bestseller
+                      </span>
+                      <button
+                        onClick={() => {
+                          addToFavorites({
+                            ...product,
+                            qty: 1,
+                            selectedWeight: activeWeight,
+                            price: offerPrice,
+                            img: product.images[0],
+                          });
+                          toast.success("Product Added To Favorite");
+                        }}
+                        className={`absolute top-2 right-2 border p-2 rounded-full ${
+                          favorites.some((f) => f.id === product.id)
+                            ? "text-primary border-primary"
+                            : "text-primary border-primary"
+                        } group-hover:text-white group-hover:bg-primary`}
+                      >
+                        <FiHeart />
+                      </button>
                     </div>
-                    <div
-                      onClick={() =>{
-                        addToFavorites({
-                          ...product,
-                          qty: 1,
-                          selectedWeight: activeWeight,
-                          price: offerPrice,
-                          img: product.images[0],
-                        });
-                        toast.success("Product Added To Favorite")
-                      }}
-                      className="absolute top-6 right-6 text-green1 border border-green1 p-2 rounded-full text-xl hover:bg-green1 hover:text-white cursor-pointer"
-                    >
-                      <FiHeart />
-                    </div>
-                    <div className="border-2 border-dotted border-green1 rounded-2xl">
-                      <img
-                        src={product.images[0]}
-                        alt={product.name}
-                        className="w-full h-56 object-contain p-4 mb-4"
-                      />
-                    </div>
+
                     <Link
                       to={`/shop/${product.id}`}
                       className="font-semibold text-base sm:text-lg text-center block mb-2"
@@ -289,7 +289,7 @@ const Shop = () => {
                     <div className="w-[90%] h-[1px] border-b border-dashed border-green1 mx-auto mb-3" />
                     <div className="flex justify-between items-center mt-auto px-1">
                       <button
-                        onClick={() =>{
+                        onClick={() => {
                           addToCart({
                             ...product,
                             qty: 1,
@@ -297,9 +297,8 @@ const Shop = () => {
                             price: offerPrice,
                             img: product.images[0],
                           });
-                          toast.success("Product Added Successfully"); 
-                        }
-                        }
+                          toast.success("Product Added Successfully");
+                        }}
                         className="bg-green1 text-white w-1/2 py-2 rounded-md text-xl flex justify-center items-center hover:bg-green2 transition"
                       >
                         <IoCartOutline />

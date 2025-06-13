@@ -2,19 +2,23 @@ import { useState, useEffect } from "react";
 import { FaStar, FaRegHeart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useStore } from "../Context/StoreContext";
 
 const PopularProduct = () => {
+  const { addToFavorites, addToCart } = useStore();
   const [productData, setProductData] = useState([]);
-      useEffect(() => {
-        fetch("/DryFruitsProductData.json")
-          .then((res) => res.json())
-          .then((data) => {
-            setProductData(data);
-          })
-          .catch((err) => {
-            console.error("Error loading ProductData.json", err);
-          });
-      }, []);
+  useEffect(() => {
+    fetch("/DryFruitsProductData.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setProductData(data);
+      })
+      .catch((err) => {
+        console.error("Error loading ProductData.json", err);
+      });
+  }, []);
   return (
     <div className="bg-green4 py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -48,21 +52,36 @@ const PopularProduct = () => {
                 key={product.id}
                 className="group bg-white rounded-2xl p-4 shadow-md hover:ring-2 hover:ring-green1 transition-all duration-300 relative"
               >
-                {/* Badge & Wishlist */}
-                <div className="absolute top-4 left-4 bg-green1 text-white text-xs px-3 py-1 rounded-r-full">
-                  Bestseller
-                </div>
-                <div className="absolute top-4 right-4 text-green1 border border-green1 p-2 rounded-full text-xl hover:bg-green1 hover:text-white transition cursor-pointer">
-                  <FaRegHeart />
-                </div>
-
-                {/* Image */}
-                <div className="border-2 border-dotted border-green1 rounded-2xl mb-4">
-                  <img
-                    src={product.images[0]}
-                    alt={product.name}
-                    className="w-full h-56 object-contain p-4 group-hover:rotate-y-180 transition-all duration-300"
-                  />
+                <div className="relative h-60 flex items-center justify-center border-2 border-dashed border-primary rounded-md overflow-hidden">
+                  <Link to={`/shop/${product.id}`}>
+                    <img
+                      src={
+                        product.images && product.images.length > 0
+                          ? product.images[0]
+                          : ""
+                      }
+                      alt={product.name}
+                      className="w-full h-full p-3 object-contain transition-transform duration-700 transform hover:rotate-y-180"
+                    />
+                  </Link>
+                  <span className="absolute top-2 left-0 bg-primary text-white text-xs px-3 py-1 rounded-r-full shadow">
+                    Bestseller
+                  </span>
+                  <button
+                    onClick={() => {
+                      addToFavorites({
+                        ...product,
+                        qty: 1,
+                        selectedWeight: activeWeight,
+                        price,
+                        img: product.images[0],
+                      });
+                      toast.success("Product Added To Favorite");
+                    }}
+                    className={`absolute top-2 right-2 border p-2 rounded-full group-hover:text-white group-hover:bg-primary`}
+                  >
+                    <FaRegHeart />
+                  </button>
                 </div>
 
                 {/* Name */}
@@ -76,8 +95,8 @@ const PopularProduct = () => {
                 {/* Price */}
                 <p className="text-center text-gray-600 text-sm mb-3">
                   MRP:{" "}
-                  <span className="line-through text-gray-400">₹{mrp}</span>{" "}
-                  ₹{price}
+                  <span className="line-through text-gray-400">₹{mrp}</span> ₹
+                  {price}
                 </p>
 
                 {/* Divider */}
@@ -85,7 +104,19 @@ const PopularProduct = () => {
 
                 {/* Action Row */}
                 <div className="flex justify-between items-center px-1">
-                  <button className="bg-green1 text-white w-1/2 py-2 rounded-md text-xl flex justify-center items-center hover:bg-green2 transition">
+                  <button
+                    onClick={() => {
+                      addToCart({
+                        ...product,
+                        qty: 1,
+                        selectedWeight: activeWeight,
+                        price,
+                        img: product.images[0],
+                      });
+                      toast.success("Product Added Successfully");
+                    }}
+                    className="bg-green1 text-white w-1/2 py-2 rounded-md text-xl flex justify-center items-center hover:bg-green2 transition"
+                  >
                     <IoCartOutline />
                   </button>
                   <div className="bg-green1 text-white px-3 py-1 rounded-md flex items-center gap-1 text-sm">

@@ -8,6 +8,7 @@ import { useStore } from "../Context/StoreContext";
 import { CgProfile } from "react-icons/cg";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { FaArrowUp } from "react-icons/fa";
+import Search from "./Search";
 
 const Navbar = () => {
   const { favorites, cartItems } = useStore();
@@ -57,7 +58,7 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  const pagesItems = ["About Us", "Contact Us", "Blogs"];
+  const pagesItems = ["About Us", "Contact Us"];
   const userFirstLetter = user ? user.charAt(0).toUpperCase() : "";
 
   const isMobile = windowWidth < 1024; // For Tailwind lg breakpoint
@@ -145,16 +146,18 @@ const Navbar = () => {
 
         {/* Right icons */}
         <div className="flex items-center space-x-4 relative">
-          <div className="hidden lg:flex items-center border-2 border-green2 rounded-md overflow-hidden shadow-sm">
-            <input
+          <div className="hidden sm:flex items-center border-2 border-green2 rounded-md  shadow-sm">
+            {/* <input
               type="search"
               placeholder="Search dry fruits..."
               className="px-4 py-2 w-64 outline-none text-sm"
             />
             <button className="px-3 text-green-600">
               <FiSearch size={18} />
-            </button>
+            </button> */}
+            <Search/>
           </div>
+          
 
           <Link to="/addtofav" className="relative border border-green1 rounded-full p-2 text-green-700 hover:bg-primary hover:text-white">
             <FaHeart size={18} />

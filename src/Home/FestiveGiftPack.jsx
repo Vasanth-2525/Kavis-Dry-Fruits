@@ -24,6 +24,8 @@ const FestiveGiftPack = () => {
       });
   }, []);
 
+  const filteredProduct = productData.filter((item) => item.category !== "Combo")
+
   const settings = {
     dots: false,
     infinite: true,
@@ -64,7 +66,7 @@ const FestiveGiftPack = () => {
 
       <div className="max-w-6xl mx-auto">
         <Slider {...settings}>
-          {productData.map((product) => {
+          {filteredProduct.map((product) => {
             const activeWeight = product.weights?.[0] ?? "";
             const price = product.prices?.[activeWeight] ?? 0;
             const mrp = price ? Math.floor(price / 0.84) : 0;

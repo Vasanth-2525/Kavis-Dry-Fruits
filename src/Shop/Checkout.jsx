@@ -468,7 +468,7 @@ const Checkout = () => {
           </button>
         </form>
 
-        <div className="border border-green-500 rounded-xl p-6 bg-white shadow-sm h-fit sticky top-4">
+        <div className="border border-green-500 rounded-xl p-6 bg-white shadow-sm h-fit md:sticky top-4">
           <h3 className="text-xl font-bold mb-4">Order Summary</h3>
           <div className="space-y-2 text-sm font-medium">
             <div className="flex justify-between">

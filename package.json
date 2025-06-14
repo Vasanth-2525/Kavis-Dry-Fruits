@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.1.8",
     "aos": "^2.3.4",
     "emailjs-com": "^3.2.0",
+    "firebase": "^11.9.1",
     "jwt-decode": "^4.0.0",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",

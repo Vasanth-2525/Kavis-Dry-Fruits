@@ -159,7 +159,7 @@ const Offers = () => {
 
         {/* Sidebar Filters */}
         {(showFilters || windowWidth >= 768) && (
-          <aside className="bg-[#fffde7] h-fit rounded-xl p-4 shadow border border-green-200 sticky top-4">
+          <aside className="bg-[#fffde7] h-fit rounded-xl p-4 shadow border border-green-200 md:sticky top-4">
             <h2 className="font-bold text-lg mb-4 text-green-700">
               Filter Options
             </h2>

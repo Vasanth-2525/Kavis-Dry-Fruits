@@ -1,41 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "../Context/StoreContext";
 
 const Search = () => {
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
-  const [data, setData] = useState([]);
+  const { allProducts } = useStore();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("/DryFruitsProductData.json")
-      .then((res) => res.json())
-      .then((json) => setData(json))
-      .catch((err) => console.error("Error loading JSON:", err));
-  }, []);
-
-  const suggestions = data.map((item) => ({
-    id: item.id,
-    name: item.name,
-    category: item.category,
-  }));
-
-  const filteredSuggestions = query.trim() === ""
-    ? []
-    : suggestions.filter((item) =>
-        item.name.toLowerCase().includes(query.toLowerCase()) ||
-        item.category.toLowerCase().includes(query.toLowerCase())
-      );
+  const filteredSuggestions =
+    query.trim() === ""
+      ? []
+      : allProducts.filter((item) =>
+          item.name.toLowerCase().includes(query.toLowerCase()) ||
+          item.category.toLowerCase().includes(query.toLowerCase())
+        );
 
   const handleSelect = (item) => {
     setQuery("");
     setFocused(false);
-    if (item.category === "Combo") {
-      navigate(`/combos/${item.id}`);
-    } else {
-      navigate(`/shop/${item.id}`);
-    }
+    navigate(item.category === "Combo" ? `/combos/${item.id}` : `/shop/${item.id}`);
   };
 
   return (

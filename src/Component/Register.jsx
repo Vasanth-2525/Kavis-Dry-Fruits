@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
+import { auth, db } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 import Registerbg from "/images/Register.jpg";
 
@@ -20,8 +24,9 @@ const Register = () => {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const [agreed, setAgreed] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSendOtp = (e) => {
+  const handleSendOtp = async (e) => {
     e.preventDefault();
 
     if (!email.includes("@")) {
@@ -36,19 +41,10 @@ const Register = () => {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem("RegisterUser")) || [];
-    const duplicate = users.find((user) => user.email === email);
-
-    if (duplicate) {
-      setMessage("User with this email already exists.");
-      setMessageType("error");
-      setTimeout(() => navigate("/login"), 1000);
-      return;
-    }
-
     const otp = generateOTP();
     setGeneratedOtp(otp);
 
+    // Send OTP via EmailJS
     emailjs
       .send(
         "service_a6grxsl",
@@ -73,23 +69,36 @@ const Register = () => {
       });
   };
 
-  const handleVerifyOtp = (e) => {
+  const handleVerifyOtp = async (e) => {
     e.preventDefault();
 
     if (enteredOtp === generatedOtp) {
-      const users = JSON.parse(localStorage.getItem("RegisterUser")) || [];
-      const newUser = {
-        username: `${firstName} ${lastName}`,
-        email,
-        password,
-        isAdmin: false,
-      };
+      try {
+        // Firebase Auth Email/Password creation
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
 
-      localStorage.setItem("RegisterUser", JSON.stringify([...users, newUser]));
-      setMessage("OTP verified! Registration successful.");
-      setMessageType("success");
+        // Save user data in Firestore
+        await setDoc(doc(db, "users", user.uid), {
+          username: `${firstName} ${lastName}`,
+          email: email,
+          createdAt: new Date(),
+        });
 
-      setTimeout(() => navigate("/login"), 1000);
+        // No need to manually create subcollections (Firestore best practice)
+
+        setMessage("OTP verified! Registration successful.");
+        setMessageType("success");
+
+        setTimeout(() => navigate("/login"), 1000);
+      } catch (error) {
+        setMessage("Registration failed: " + error.message);
+        setMessageType("error");
+      }
     } else {
       setMessage("Incorrect OTP.");
       setMessageType("error");
@@ -98,7 +107,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white font-sans">
-      <div className="flex  max-w-6xl w-full h-[580px] p-2 bg-white rounded-xl border border-green-600 shadow-xl overflow-hidden">
+      <div className="flex max-w-6xl w-full h-[580px] p-2 bg-white rounded-xl border border-green-600 shadow-xl overflow-hidden">
         <div className="w-1/2 hidden md:block">
           <img
             src={Registerbg}
@@ -164,16 +173,23 @@ const Register = () => {
                 required
                 className="w-full border border-green-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-300"
               />
-
-              <input
-                type="password"
-                name="user_password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full border border-green-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-300"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="user_password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full border border-green-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-300"
+                />
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer select-none"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
 
               <div className="flex items-center gap-2">
                 <input

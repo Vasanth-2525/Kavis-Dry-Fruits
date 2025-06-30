@@ -44,6 +44,7 @@ const RelatedProducts = ({ relatedProducts }) => {
             const relPrice = p.prices[relWeight];
             const relMrp = Math.floor(relPrice / 0.84);
             const relRating = p.rating.toFixed(1);
+            const isOutOfStock = p.stock <= 0;
 
             return (
               <div key={p.id} className="px-2 text-center">
@@ -65,12 +66,11 @@ const RelatedProducts = ({ relatedProducts }) => {
                     {p.name} ({relWeight})
                   </h3>
                   <p className="text-center text-gray-600 text-sm mb-2">
-                    MRP:{" "}
-                    <span className="line-through text-gray-400">
-                      ₹{relMrp}
-                    </span>{" "}
-                    ₹{relPrice}
+                    MRP: <span className="line-through text-gray-400">₹{relMrp}</span> ₹{relPrice}
                   </p>
+                  {isOutOfStock && (
+                    <p className="text-red-500 text-sm font-medium mb-2">Out of Stock</p>
+                  )}
                   <div className="w-[90%] h-[1px] border-b border-dashed border-green1 mx-auto mb-3" />
                   <div className="flex justify-center mt-auto">
                     <Link

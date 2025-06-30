@@ -40,12 +40,13 @@ const NextArrow = (props) => {
 
 // Category data with both default and hover images
 const categories = [
-  { name: "Almonds", defaultImage: cashews, hoverImage: almonds },
-  { name: "Cashews", defaultImage: cashews, hoverImage: almonds },
-  { name: "Dates", defaultImage: cashews, hoverImage: almonds },
-  { name: "Raisins", defaultImage: cashews, hoverImage: almonds },
-  { name: "Pistachios", defaultImage: cashews, hoverImage: almonds },
-  { name: "Mixed Dry Fruits", defaultImage: cashews, hoverImage: almonds },
+  { name: "Nuts", defaultImage: cashews, hoverImage: almonds },
+  { name: "DryFruits", defaultImage: dates, hoverImage: almonds },
+  { name: "Dates", defaultImage: almonds, hoverImage: cashews },
+  { name: "Raisins", defaultImage: raisins, hoverImage: almonds },
+  { name: "Dried Fruits", defaultImage: pistachios, hoverImage: almonds },
+  { name: "Ayurvedic", defaultImage: mixed, hoverImage: almonds },
+  { name: "Seeds", defaultImage: mixed, hoverImage: almonds },
 ];
 
 const Category = () => {

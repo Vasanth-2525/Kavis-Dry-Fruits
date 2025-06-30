@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import LoginBg from "/images/Login.jpg";
-import { handleGoogleLogin as firebaseGoogleLogin } from "./Confige";
+import { auth, provider, db } from "../firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,72 +14,97 @@ const Login = () => {
   const [messageType, setMessageType] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("RegisterUser")) || [];
-    const foundUser = users.find(
-      (user) => user.email === email && user.password === password
-    );
+  // Function to check Firestore User Doc and set Role
+  const checkAndSetRole = async (user) => {
+    const userDocRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userDocRef);
 
-    if (foundUser) {
-      localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("username", foundUser.username);
-      setMessage("Login Successful!");
-      setMessageType("success");
-
-      setTimeout(() => {
-        navigate("/");
-        window.location.reload();
-      }, 1000);
+    // If user doc exists
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      if (!userData.role) {
+        const role = user.email === "vasanthlogan2525@gmail.com" ? "Admin" : "User";
+        await setDoc(userDocRef, { ...userData, role }, { merge: true });
+        console.log("Role updated to:", role);
+      }
     } else {
-      setMessage("Invalid email or password.");
-      setMessageType("error");
-      setTimeout(() => {
-        setMessage("");
-        setMessageType("");
-      }, 3000);
+      // If no doc, create new with role
+      const role = user.email === "vasanthlogan2525@gmail.com" ? "Admin" : "User";
+      await setDoc(userDocRef, {
+        username: user.displayName || "No Name",
+        email: user.email,
+        role: role,
+        password:`${user.displayName}123`,
+        createdAt: new Date(),
+      });
+      console.log("New user created with role:", role);
     }
   };
 
+  // Email/Password Login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await checkAndSetRole(user); 
+
+      setMessage("Login Successful!");
+      setMessageType("success");
+
+      
+      const userDocRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userDocRef);
+      const userData = userSnap.data();
+
+      setTimeout(() => {
+        if (userData?.role === "Admin") {
+          navigate("/adminpanel");
+        } else {
+          navigate("/");
+        }
+      }, 1000);
+    } catch (error) {
+      setMessage("Invalid email or password.");
+      setMessageType("error");
+      console.error("Login error:", error);
+    }
+  };
+
+  // Google Sign In
   const handleGoogleSignIn = async () => {
-    const user = await firebaseGoogleLogin(setMessage);
-    if (user) {
-      const { displayName, email } = user;
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
 
-      let users = JSON.parse(localStorage.getItem("RegisterUser")) || [];
-      const existingUser = users.find((u) => u.email === email); 
-
-      if (!existingUser) {
-        const newUser = {
-          username: displayName,
-          email: email, 
-          password: `${displayName}@2525`, 
-          isAdmin: false,
-        };
-        users.push(newUser); 
-        localStorage.setItem("RegisterUser", JSON.stringify(users)); 
-        console.log("New Google user added:", newUser);
-      } else {
-        console.log("Google user already exists:", existingUser);
-      }
-
-      localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("username", displayName);
+      await checkAndSetRole(user); 
 
       setMessage("Login Successful via Google!");
       setMessageType("success");
 
+     
+      const userDocRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userDocRef);
+      const userData = userSnap.data();
+
       setTimeout(() => {
-        navigate("/");
-        window.location.reload();
+        if (userData?.role === "Admin") {
+          navigate("/adminpanel");
+        } else {
+          navigate("/");
+        }
       }, 1000);
+    } catch (error) {
+      setMessage("Google Sign-In failed.");
+      setMessageType("error");
+      console.error("Google Sign-In error:", error);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4">
       <div className="flex flex-col md:flex-row max-w-5xl w-full shadow-lg border p-2 border-green-400 rounded-xl overflow-hidden h-auto md:h-[90vh]">
-        {/* Left Side Image */}
         <div className="hidden md:block md:w-1/2 h-64 md:h-auto">
           <img
             src={LoginBg}
@@ -86,7 +113,6 @@ const Login = () => {
           />
         </div>
 
-        {/* Right Side Form */}
         <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
           <div className="mb-4">
             <img
@@ -116,10 +142,7 @@ const Login = () => {
 
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 Email Id *
               </label>
               <input
@@ -134,10 +157,7 @@ const Login = () => {
             </div>
 
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Password *
               </label>
               <div className="relative">
@@ -161,7 +181,7 @@ const Login = () => {
 
             <div className="flex justify-between items-center text-sm">
               <label className="flex items-center">
-                <input type="checkbox" className="mr-2" />
+                <input type="checkbox" required className="mr-2" />
                 Remember me
               </label>
               <Link
@@ -199,10 +219,7 @@ const Login = () => {
 
           <p className="text-sm text-center text-gray-600 mt-6">
             Don’t have an account?{" "}
-            <Link
-              className="text-green-600 hover:underline font-medium"
-              to="/register"
-            >
+            <Link className="text-green-600 hover:underline font-medium" to="/register">
               Sign Up
             </Link>
           </p>

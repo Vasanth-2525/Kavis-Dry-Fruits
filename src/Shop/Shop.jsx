@@ -8,8 +8,7 @@ import PageNavigation from "../Component/PageNavigation";
 import { Link } from "react-router-dom";
 import { useStore } from "../Context/StoreContext";
 import NewArrived from "../Home/NewArrived";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-hot-toast";
 
 const categories = [
   "All",
@@ -34,7 +33,7 @@ const tags = [
 const productsPerPage = 9;
 
 const Shop = () => {
-  const [products, setProducts] = useState([]);
+  const { allProducts, addToCart, addToFav } = useStore();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedWeight, setSelectedWeight] = useState("All");
   const [selectedRating, setSelectedRating] = useState(0);
@@ -43,32 +42,12 @@ const Shop = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { addToFavorites, addToCart, favorites } = useStore();
-
-  useEffect(() => {
-    fetch("/DryFruitsProductData.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        const prices = data.flatMap((p) =>
-          p?.prices && typeof p.prices === "object"
-            ? Object.values(p.prices).filter((v) => typeof v === "number")
-            : []
-        );
-        const max = prices.length ? Math.max(...prices) : 0;
-        setPriceRange([0, max]);
-      })
-      .catch((err) =>
-        console.error("Error loading DryFruitsProductData.json:", err)
-      );
-  }, []);
-
-  const safePrices = products.flatMap((p) =>
+  const safePrices = (allProducts || []).flatMap((p) =>
     p?.prices && typeof p.prices === "object"
       ? Object.values(p.prices).filter((v) => typeof v === "number")
       : []
   );
-  const maxPrice = safePrices.length ? Math.max(...safePrices) : 0;
+  const maxPrice = safePrices.length ? Math.max(...safePrices) : 1000;
   const [priceRange, setPriceRange] = useState([0, maxPrice]);
 
   useEffect(() => {
@@ -80,23 +59,25 @@ const Shop = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const filteredProducts = products.filter((p) => {
-    if (!p.prices || typeof p.prices !== "object") return false;
+  const filteredProducts = (allProducts || []).filter((p) => {
+    if (p.category === "Combo") return false;
+
+    if (!p?.prices || typeof p.prices !== "object") return false;
+
     const matchCategory =
       selectedCategory === "All" || p.category === selectedCategory;
-    const weightToUse =
-      selectedWeight !== "All" ? selectedWeight : p.weights[0];
-    const price = p.prices[weightToUse];
-    if (typeof price !== "number") return false;
     const matchWeight =
-      selectedWeight === "All" || p.weights.includes(selectedWeight);
+      selectedWeight === "All" || p.weights?.includes(selectedWeight);
+    const weightToUse =
+      selectedWeight !== "All" ? selectedWeight : p.weights?.[0];
+    const price = p.prices[weightToUse] || 0;
+    const matchPrice = price >= priceRange[0] && price <= priceRange[1];
     const matchRating = selectedRating === 0 || p.rating >= selectedRating;
     const matchTag =
-      selectedTag === "All" ||
-      (Array.isArray(p.tags) && p.tags.includes(selectedTag));
-    const matchPrice = price >= priceRange[0] && price <= priceRange[1];
+      selectedTag === "All" || (p.tags && p.tags.includes(selectedTag));
+
     return (
-      matchCategory && matchWeight && matchRating && matchTag && matchPrice
+      matchCategory && matchWeight && matchPrice && matchRating && matchTag
     );
   });
 
@@ -141,63 +122,73 @@ const Shop = () => {
               Filter Options
             </h2>
 
-            {/* Price Range */}
             <div className="mb-4">
-              <h3 className="font-semibold border-b border-dashed border-green-400 pb-1 mb-2 text-green-700">
-                Price Range
-              </h3>
-              <p className="text-sm text-green-600 mb-2">
+              <h3 className="font-semibold text-green-700">Price Range</h3>
+              <p>
                 ₹{priceRange[0]} - ₹{priceRange[1]}
               </p>
               <input
                 type="range"
                 min="0"
-                max={maxPrice}
+                max={isNaN(maxPrice) ? "1000" : maxPrice.toString()}
                 value={priceRange[1]}
                 onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
                 className="w-full accent-green-600"
               />
             </div>
 
-            {/* Dynamic Filters */}
-            {[
-              ["Category", categories, selectedCategory, setSelectedCategory],
-              ["Weight", weights, selectedWeight, setSelectedWeight],
-              [
-                "Ratings",
-                [
-                  { label: "4★ & up", value: 4 },
-                  { label: "3★ & up", value: 3 },
-                  { label: "All Ratings", value: 0 },
-                ],
-                selectedRating,
-                setSelectedRating,
-              ],
-              ["Tags", tags, selectedTag, setSelectedTag],
-            ].map(([title, list, selected, setter], i) => (
-              <div className="mb-4" key={i}>
-                <h3 className="font-semibold border-b border-dashed border-green-400 pb-1 mb-2 text-green-700">
-                  {title}
-                </h3>
-                {list.map((item) => {
-                  const val = typeof item === "object" ? item.value : item;
-                  const label = typeof item === "object" ? item.label : item;
-                  return (
-                    <label key={val} className="flex items-center gap-2 mb-2">
-                      <input
-                        type="radio"
-                        name={title}
-                        value={val}
-                        checked={selected === val}
-                        onChange={() => onFilterChange(setter)(val)}
-                        className="accent-green-600"
-                      />
-                      {label}
-                    </label>
-                  );
-                })}
-              </div>
-            ))}
+            {["Category", "Weight", "Ratings", "Tags"].map((title, i) => {
+              const list =
+                title === "Category"
+                  ? categories
+                  : title === "Weight"
+                  ? weights
+                  : title === "Ratings"
+                  ? [
+                      { label: "4★ & up", value: 4 },
+                      { label: "3★ & up", value: 3 },
+                      { label: "All Ratings", value: 0 },
+                    ]
+                  : tags;
+              const selected =
+                title === "Category"
+                  ? selectedCategory
+                  : title === "Weight"
+                  ? selectedWeight
+                  : title === "Ratings"
+                  ? selectedRating
+                  : selectedTag;
+              const setter =
+                title === "Category"
+                  ? setSelectedCategory
+                  : title === "Weight"
+                  ? setSelectedWeight
+                  : title === "Ratings"
+                  ? setSelectedRating
+                  : setSelectedTag;
+
+              return (
+                <div key={i} className="mb-4">
+                  <h3 className="font-semibold text-green-700">{title}</h3>
+                  {list.map((item) => {
+                    const val = typeof item === "object" ? item.value : item;
+                    const label = typeof item === "object" ? item.label : item;
+                    return (
+                      <label key={val} className="flex gap-2 mb-2">
+                        <input
+                          type="radio"
+                          name={title}
+                          value={val}
+                          checked={selected === val}
+                          onChange={() => onFilterChange(setter)(val)}
+                        />
+                        {label}
+                      </label>
+                    );
+                  })}
+                </div>
+              );
+            })}
 
             <button
               onClick={() => {
@@ -208,14 +199,13 @@ const Shop = () => {
                 setPriceRange([0, maxPrice]);
                 setCurrentPage(1);
               }}
-              className="mt-4 py-2 px-4 bg-gray-200 rounded hover:bg-green-700 hover:text-white text-sm"
+              className="mt-4 bg-gray-200 rounded p-2"
             >
               Clear Filters
             </button>
           </aside>
         )}
 
-        {/* Products Grid */}
         <main className="md:col-span-3">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedProducts.length === 0 ? (
@@ -227,26 +217,20 @@ const Shop = () => {
                 const activeWeight =
                   selectedWeight !== "All"
                     ? selectedWeight
-                    : product.weights[0];
-                const price = product.prices[activeWeight];
-                const offerPrice = Math.floor(price * 0.63);
-                const mrp = Math.round(price);
+                    : product.weights?.[0];
+                const price = product.prices[activeWeight] || 0;
+                const mrp = Math.floor(price / 0.84);
                 const avgRating = product.rating || 4.5;
 
                 return (
                   <div
                     key={`${product.id}-${activeWeight}`}
-                    className="group bg-white rounded-2xl p-4 shadow hover:ring-2 hover:ring-green1 transition relative"
+                    className="group bg-white rounded-2xl p-4 shadow-md hover:ring-2 hover:ring-green1 transition-all duration-300 relative"
                   >
-                    {/* Product Image */}
                     <div className="relative h-60 flex items-center justify-center border-2 border-dashed border-primary rounded-md overflow-hidden">
                       <Link to={`/shop/${product.id}`}>
                         <img
-                          src={
-                            product.images && product.images.length > 0
-                              ? product.images[0]
-                              : ""
-                          }
+                          src={product.images?.[0] || ""}
                           alt={product.name}
                           className="w-full h-full p-3 object-contain transition-transform duration-700 transform hover:rotate-y-180"
                         />
@@ -256,50 +240,65 @@ const Shop = () => {
                       </span>
                       <button
                         onClick={() => {
-                          addToFavorites({
+                          addToFav({
                             ...product,
+                            imageUrl: product.images[0],
                             qty: 1,
                             selectedWeight: activeWeight,
-                            price: offerPrice,
-                            img: product.images[0],
+                            price,
                           });
-                          toast.success("Product Added To Favorite");
+                          // toast.success("Added to Favorites");
                         }}
-                        className={`absolute top-2 right-2 border p-2 rounded-full ${
-                          favorites.some((f) => f.id === product.id)
-                            ? "text-primary border-primary"
-                            : "text-primary border-primary"
-                        } group-hover:text-white group-hover:bg-primary`}
+                        className="absolute top-2 right-2 border p-2 rounded-full group-hover:text-white group-hover:bg-primary transition"
                       >
                         <FiHeart />
                       </button>
                     </div>
 
-                    <Link
-                      to={`/shop/${product.id}`}
-                      className="font-semibold text-base sm:text-lg text-center block mb-2"
-                    >
-                      {product.name} ({activeWeight})
-                    </Link>
-                    <p className="text-center text-gray-600 text-sm mb-2">
-                      MRP:{" "}
-                      <span className="line-through text-gray-400">₹{mrp}</span>{" "}
-                      ₹{offerPrice}
-                    </p>
+                    <h3 className="font-semibold text-base sm:text-lg text-center mb-2">
+                      {product.name}
+                    </h3>
+                    {product.stock <= 0 ? (
+                      <>
+                      <p className="text-center text-gray-600 text-sm mb-2">
+                        MRP:{" "}
+                        <span className="line-through text-gray-400">
+                          ₹{mrp}
+                        </span>{" "}
+                        ₹{price}
+                      </p>
+                      <p className="text-center text-red-500 text-sm mb-2 font-medium">
+                        Out of Stock
+                      </p>
+                      </>
+                    ) : (
+                      <p className="text-center text-gray-600 text-sm mb-2">
+                        MRP:{" "}
+                        <span className="line-through text-gray-400">
+                          ₹{mrp}
+                        </span>{" "}
+                        ₹{price}
+                      </p>
+                    )}
                     <div className="w-[90%] h-[1px] border-b border-dashed border-green1 mx-auto mb-3" />
                     <div className="flex justify-between items-center mt-auto px-1">
                       <button
+                        disabled={product.stock <= 0}
                         onClick={() => {
                           addToCart({
                             ...product,
+                            imageUrl: product.images[0],
                             qty: 1,
                             selectedWeight: activeWeight,
-                            price: offerPrice,
-                            img: product.images[0],
+                            price,
+                            weights: product.weights,
                           });
-                          toast.success("Product Added Successfully");
                         }}
-                        className="bg-green1 text-white w-1/2 py-2 rounded-md text-xl flex justify-center items-center hover:bg-green2 transition"
+                        className={`${
+                          product.stock <= 0
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-green1 hover:bg-green2"
+                        } text-white w-1/2 py-2 rounded-md text-xl flex justify-center items-center transition`}
                       >
                         <IoCartOutline />
                       </button>
@@ -315,13 +314,11 @@ const Shop = () => {
           </div>
 
           {totalPages > 1 && (
-            <div className="mt-10">
-              <PageNavigation
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            </div>
+            <PageNavigation
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
           )}
         </main>
       </div>

@@ -1,9 +1,22 @@
 import { Navigate } from "react-router-dom";
+import { useStore } from "../Context/StoreContext";
 
 const PrivateRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  const { user, loading } = useStore(); 
 
-  return isAuthenticated ? children : <Navigate to="/login" replace />;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-gray-600 text-lg">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
 };
 
 export default PrivateRoute;

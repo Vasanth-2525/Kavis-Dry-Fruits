@@ -1,90 +1,119 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { FaStar, FaPlus, FaMinus, FaHeart, FaShare } from "react-icons/fa";
+import { useParams, useNavigate } from "react-router-dom";
+import { FaStar, FaPlus, FaMinus, FaHeart } from "react-icons/fa";
 import { useStore } from "../Context/StoreContext";
 import PageHeader from "../Component/PageHeader";
 import Testimonials from "./Testimonials";
 import RelatedProducts from "./RelatedProducts";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
+import { toast } from "react-hot-toast";
+import { updateDoc, doc } from "firebase/firestore";
+import { db } from "../firebase";
+
 
 const SingleProductView = () => {
   const { id } = useParams();
-  const { addToCart, addToFavorites } = useStore();
+  const navigate = useNavigate();
+  const { allProducts, addToCart, addToFav } = useStore();
+
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [activeWeight, setActiveWeight] = useState("");
-  const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
+  const [reviewInput, setReviewInput] = useState({ user: "", comment: "" });
 
   useEffect(() => {
-    fetch("/DryFruitsProductData.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-      })
-      .catch((err) => {
-        console.error("Error loading ProductData.json", err);
-      });
-  }, []);
+    if (!id || !allProducts.length) return;
 
-  useEffect(() => {
-    if (products.length === 0) return; // Only run if products are loaded
-
-    const selectedProduct = products.find((p) => p.id === parseInt(id));
-    if (selectedProduct) {
-      setProduct(selectedProduct);
-      setSelectedImage(selectedProduct.images?.[0] || "");
-      setActiveWeight(selectedProduct.weights?.[0] || "");
+    const selected = allProducts.find(
+      (p) => p.id === id || p.id === parseInt(id)
+    );
+    if (selected) {
+      setProduct(selected);
+      setSelectedImage(selected.images?.[0] || "");
+      setActiveWeight(selected.weights?.[0] || "");
       setQuantity(1);
-      const related = products.filter(
-        (p) =>
-          p.category === selectedProduct.category && p.id !== selectedProduct.id
+
+      const related = allProducts.filter(
+        (p) => p.category === selected.category && p.id !== selected.id
       );
       setRelatedProducts(related);
     } else {
       setProduct(null);
       setRelatedProducts([]);
     }
+
     window.scrollTo(0, 0);
-  }, [id, products]); // <== Fix: depend on both id and products
+  }, [id, allProducts]);
 
   if (!product) {
     return (
-      <div className="text-center mt-10 text-red-600">Product not found</div>
+      <div className="text-center mt-10 text-red-600 font-semibold">
+        Product not found.
+      </div>
     );
   }
 
-  const Offer_price = product.prices[activeWeight];
-  const mrp = Math.floor(Offer_price / 0.84);
-  const averageRating = product.rating.toFixed(1);
+  const price = product.prices?.[activeWeight] || 0;
+  const mrp = Math.floor(price / 0.84);
+  const averageRating =
+    typeof product.rating === "number" ? product.rating.toFixed(1) : "4.5";
+  const isOutOfStock = product.stock <= 0;
 
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
   const handleAddToCart = () => {
+    if (isOutOfStock) return toast.error("Out of Stock");
     addToCart({
-      ...product,
+      id: product.id,
+      name: product.name,
+      price,
       qty: quantity,
+      image: product.images?.[0],
       selectedWeight: activeWeight,
-      price: Offer_price,
-      img: product.images?.[0],
+      weights: product.weights,
+      category: product.category,
     });
-    toast.success("Product Added Successfully"); 
   };
 
   const handleAddToFav = () => {
-    addToFavorites({
-      ...product,
-      qty: quantity,
-      selectedWeight: activeWeight,
-      price: Offer_price,
-      img: product.images?.[0],
+    addToFav({
+      id: product.id,
+      name: product.name,
+      image: product.images?.[0],
+      price,
     });
-    toast.success("Product Added To Favorite")
+  };
+
+  const handleReviewSubmit = async () => {
+    if (!reviewInput.user || !reviewInput.comment) {
+      toast.error("Please fill all review fields!");
+      return;
+    }
+
+    const newReview = {
+      user: reviewInput.user,
+      comment: reviewInput.comment,
+      date: new Date().toISOString().split("T")[0],
+    };
+
+    try {
+      const productRef = doc(db, "products", product.id);
+      await updateDoc(productRef, {
+        reviews: [...(product.reviews || []), newReview],
+      });
+
+      toast.success("Review added successfully!");
+      setProduct((prev) => ({
+        ...prev,
+        reviews: [...(prev.reviews || []), newReview],
+      }));
+      setReviewInput({ user: "", comment: "" });
+    } catch (error) {
+      console.error("Error adding review:", error);
+      toast.error("Failed to add review.");
+    }
   };
 
   return (
@@ -94,6 +123,7 @@ const SingleProductView = () => {
         subtitle="Shop"
         curpage={product.name}
       />
+
       <section className="bg-green4">
         <div className="text-center py-10">
           <h2 className="text-2xl font-bold mb-4">
@@ -104,23 +134,22 @@ const SingleProductView = () => {
 
         <div className="bg-white border-2 border-primary rounded-xl p-4 sm:p-6 mx-4 sm:mx-10 lg:mx-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:border-2 md:border-dashed md:border-primary rounded-lg">
-            {/* Image Gallery */}
-            <div className="flex flex-col items-center md:border-r-2 border-b-2 border-dashed border-primary md:border-dashed md:border-primary md:rounded-xl">
+            <div className="flex flex-col items-center md:border-r-2 border-dashed border-primary md:rounded-xl">
               <img
                 src={selectedImage}
                 alt={product.name}
-                className="w-full h-70 sm:h-96 object-contain"
+                className="w-full h-72 sm:h-96 object-contain"
               />
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4 px-4 py-4 overflow-x-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4 px-4 py-4">
                 {product.images?.map((img, idx) => (
                   <img
                     key={idx}
                     src={img}
                     onClick={() => setSelectedImage(img)}
-                    className={` w-16 h-16 object-cover border rounded-lg cursor-pointer ${
+                    className={`w-16 h-16 object-cover border rounded-lg cursor-pointer ${
                       selectedImage === img
                         ? "border-green-600"
-                        : "border-2 border-green-600  "
+                        : "border-2 border-green-200"
                     }`}
                     alt={`thumb-${idx}`}
                   />
@@ -128,40 +157,41 @@ const SingleProductView = () => {
               </div>
             </div>
 
-            {/* Product Info */}
             <div className="p-2 sm:p-4">
-              <div className="flex justify-between items-start">
-                <h2 className="text-xl sm:text-2xl font-bold text-black">
-                  {product.name} – {activeWeight}
-                </h2>
-              </div>
-
-              <div className="flex items-center gap-2 mt-2 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold text-black mb-2">
+                {product.name} – {activeWeight}
+              </h2>
+              <div className="flex items-center gap-2 text-primary mb-2">
                 {[...Array(5)].map((_, i) => (
                   <FaStar
                     key={i}
                     className={
-                      i < Math.round(product.rating)
+                      i < Math.round(product.rating || 0)
                         ? "text-primary"
                         : "text-gray-300"
                     }
                   />
                 ))}
                 <span className="text-gray-700 text-sm">
-                  ({averageRating}/5) - {product.reviews?.length} Reviews
+                  ({averageRating}/5) - {product.reviews?.length || 0} Reviews
                 </span>
               </div>
-
-              <p className="text-lg font-semibold mt-4">
-                Price:{" "}
-                <span className="line-through text-gray-400">₹{mrp}</span>{" "}
-                <span className="text-primary text-lg md:text-xl font-bold">
-                  ₹{Offer_price}
-                </span>{" "}
-                <span className="text-xs md:text-sm text-gray-500">
-                  (You save ₹{mrp - Offer_price})
-                </span>
-              </p>
+              {isOutOfStock ? (
+                <>
+                <p className="text-lg font-semibold">
+                  Price: <span className="line-through text-gray-400">₹{mrp}</span>
+                  <span className="text-primary text-lg md:text-xl font-bold"> ₹{price}</span>
+                  <span className="text-xs md:text-sm text-gray-500"> (You save ₹{mrp - price})</span>
+                </p>
+                <p className="text-red-500 font-medium text-md mb-2">Out of Stock</p>
+                </>
+              ) : (
+                <p className="text-lg font-semibold">
+                  Price: <span className="line-through text-gray-400">₹{mrp}</span>
+                  <span className="text-primary text-lg md:text-xl font-bold"> ₹{price}</span>
+                  <span className="text-xs md:text-sm text-gray-500"> (You save ₹{mrp - price})</span>
+                </p>
+              )}
 
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <select
@@ -169,27 +199,20 @@ const SingleProductView = () => {
                   onChange={(e) => setActiveWeight(e.target.value)}
                   className="px-4 py-2 border rounded-lg text-white font-semibold bg-primary cursor-pointer"
                 >
-                  {product.weights.map((w) => (
+                  {product.weights?.map((w) => (
                     <option key={w} value={w}>
                       {w}
                     </option>
                   ))}
                 </select>
-
-                <div className="bg-primary text-white flex items-center border rounded-md overflow-hidden ">
-                  <button
-                    onClick={decreaseQty}
-                    className="px-3 py-2 font-bold cursor-pointer"
-                  >
+                <div className="bg-primary text-white flex items-center border rounded-md overflow-hidden">
+                  <button onClick={decreaseQty} className="px-3 py-2 font-bold">
                     <FaMinus />
                   </button>
                   <span className="px-4 font-semibold">
                     {String(quantity).padStart(2, "0")}
                   </span>
-                  <button
-                    onClick={increaseQty}
-                    className="px-3 py-2 font-bold cursor-pointer"
-                  >
+                  <button onClick={increaseQty} className="px-3 py-2 font-bold">
                     <FaPlus />
                   </button>
                 </div>
@@ -197,41 +220,50 @@ const SingleProductView = () => {
 
               <div className="flex flex-wrap gap-4 mt-6">
                 <button
-                  className="bg-primary text-white px-6 py-2 rounded-lg font-semibold cursor-pointer"
                   onClick={handleAddToCart}
+                  disabled={isOutOfStock}
+                  className={`${
+                    isOutOfStock
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-primary hover:bg-green-700"
+                  } text-white px-6 py-2 rounded-lg font-semibold`}
                 >
                   Add to Cart
                 </button>
                 <button
-                  onClick={() => {
-                    const checkoutProduct = {
-                      ...product,
-                      qty: quantity,
-                      selectedWeight: activeWeight, 
-                      price: Offer_price, 
-                      img: product.images[0],
-                    };
-                    navigate("/checkout", { state: { checkoutProduct } });
-                  }}
-                  className="border border-green-600 text-primary px-6 py-2 rounded-lg font-semibold cursor-pointer"
+                  onClick={() =>
+                    navigate("/checkout", {
+                      state: {
+                        checkoutProduct: {
+                          ...product,
+                          quantity,
+                          selectedWeight: activeWeight,
+                          price,
+                          img: product.images?.[0],
+                        },
+                      },
+                    })
+                  }
+                  disabled={isOutOfStock}
+                  className={`border ${
+                    isOutOfStock
+                      ? "border-gray-300 text-gray-400 cursor-not-allowed"
+                      : "border-green-600 text-primary"
+                  } px-6 py-2 rounded-lg font-semibold`}
                 >
                   Buy Now
                 </button>
-
                 <button
-                  className="border border-green1 text-primary p-3 rounded-full cursor-pointer"
                   onClick={handleAddToFav}
+                  className="border border-green1 text-primary p-3 rounded-full"
                 >
                   <FaHeart />
                 </button>
               </div>
-
               <div className="border-t-2 border-b-2 border-dashed border-green1 mt-6 py-4 text-sm font-semibold text-gray-700">
                 <p>Free Shipping on orders above ₹399</p>
                 <p className="mt-1">100% Premium Quality ~ No Preservatives</p>
               </div>
-
-              {/* Icons Section */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 text-center text-sm text-green-700">
                 {[
                   {
@@ -263,17 +295,13 @@ const SingleProductView = () => {
               </div>
             </div>
           </div>
-
-          {/* Description & Benefits */}
-          <div className="mt-10 border-2 border-dashed border-primary rounded-xl p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border border-dashed border-green1 rounded-xl p-4 mt-6">
             <div>
-              <h3 className="text-lg font-bold text-black mb-2">
-                Product Description
-              </h3>
-              <p className="text-gray-700 mb-3">{product.description}</p>
-              <ul className="list-disc pl-5 space-y-1 text-gray-700">
+              <h3 className="font-bold text-lg mb-2">Product Description</h3>
+              <p className="text-gray-700 mb-4">{product.description}</p>
+              <ul className="text-gray-700 list-disc pl-5 space-y-1">
                 <li>
-                  <strong>Weight:</strong> {activeWeight}
+                  <strong>Weight:</strong> {product.weights?.[0] || "N/A"}
                 </li>
                 <li>
                   <strong>Packaging:</strong> Airtight Resealable pouch
@@ -287,21 +315,60 @@ const SingleProductView = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-black mb-2">
-                Health Benefits
-              </h3>
-              <ul className="list-decimal pl-5 space-y-2 text-gray-700">
+              <h3 className="font-bold text-lg mb-2">Health Benefits</h3>
+              <ol className="list-decimal pl-5 space-y-1 text-gray-700">
                 {product.health_benefits?.map((benefit, idx) => (
                   <li key={idx}>{benefit}</li>
                 ))}
-              </ul>
+              </ol>
             </div>
           </div>
         </div>
-      </section>
-
-      <Testimonials reviews={product.reviews} />
-      <section className="my-10 px-4 sm:px-10">
+        <div className="ml-[23%] w-full md:w-1/2 mt-10 bg-white shadow-lg border border-green-200 rounded-lg p-6">
+          <h3 className="font-bold text-2xl mb-4 text-green-700 flex items-center gap-2">
+            <FaStar className="text-yellow-500" /> Share Your Review
+          </h3>
+          <div className="flex flex-col gap-5">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your name"
+                value={reviewInput.user}
+                onChange={(e) =>
+                  setReviewInput({ ...reviewInput, user: e.target.value })
+                }
+                className="w-full p-3 border border-green-400 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Comment <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                placeholder="Write your honest feedback here..."
+                value={reviewInput.comment}
+                onChange={(e) =>
+                  setReviewInput({ ...reviewInput, comment: e.target.value })
+                }
+                className="w-full p-3 border border-green-400 rounded-md h-32 resize-none focus:outline-none focus:ring-2 focus:ring-green-600"
+                required
+              />
+            </div>
+            <div className="flex justify-end">
+              <button
+                onClick={handleReviewSubmit}
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md font-semibold shadow-md transition duration-200"
+              >
+                Submit Review
+              </button>
+            </div>
+          </div>
+        </div>
+        <Testimonials reviews={product.reviews || []} />
         <RelatedProducts relatedProducts={relatedProducts} />
       </section>
     </>

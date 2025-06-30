@@ -3,17 +3,27 @@ import { useStore } from "../Context/StoreContext";
 import PageHeader from "../Component/PageHeader";
 import { useNavigate, useLocation } from "react-router-dom";
 import emailjs from "emailjs-com";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  runTransaction,
+  doc,
+  updateDoc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
+import { toast } from "react-hot-toast";
 
 const Checkout = () => {
-  const { cartItems: storeCartItems, setCartItems } = useStore();
+  const { cartItems, clearCart, user } = useStore();
   const navigate = useNavigate();
   const location = useLocation();
-  const username = localStorage.getItem("username") || "guest";
-
   const checkoutProduct = location.state?.checkoutProduct || null;
 
-  const [cartItems, setLocalCartItems] = useState(
-    checkoutProduct ? [checkoutProduct] : storeCartItems
+  const [itemsToCheckout, setItemsToCheckout] = useState(
+    checkoutProduct ? [checkoutProduct] : cartItems
   );
 
   const [form, setForm] = useState({
@@ -24,105 +34,79 @@ const Checkout = () => {
     city: "",
     state: "",
     street: "",
-    country: "",
-    delivery: "same",
-    billing: {
-      fullname: "",
-      email: "",
-      contact: "",
-      zip: "",
-      city: "",
-      state: "",
-      street: "",
-      country: "",
-    },
+    country: "India",
   });
 
+  const [paymentMethod, setPaymentMethod] = useState("Online Payment");
   const [savedAddresses, setSavedAddresses] = useState([]);
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false);
+
+  const generateOrderId = async () => {
+    const counterRef = doc(db, "metadata", "orderCounter");
+    return await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(counterRef);
+      let orderNumber = 1;
+      if (snap.exists()) {
+        orderNumber = (snap.data().lastOrderNumber || 0) + 1;
+      }
+      transaction.set(
+        counterRef,
+        { lastOrderNumber: orderNumber },
+        { merge: true }
+      );
+      return `KDF00${String(orderNumber).padStart(3, "0")}`;
+    });
+  };
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    const stored = JSON.parse(
-      localStorage.getItem(`${username}_address`) || "[]"
-    );
-    setSavedAddresses(Array.isArray(stored) ? stored : []);
-  }, [username]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name.startsWith("billing.")) {
-      const key = name.split(".")[1];
-      setForm((prev) => ({
-        ...prev,
-        billing: { ...prev.billing, [key]: value },
-      }));
-    } else {
-      setForm((prev) => ({ ...prev, [name]: value }));
-    }
-  };
-
-  const handleSelectSavedAddress = (address) => {
-    if (!address || !address.fullname) return;
-    setForm((prev) => ({
-      ...prev,
-      ...address,
-      delivery: "same",
-      billing: {
-        fullname: "",
-        email: "",
-        contact: "",
-        zip: "",
-        city: "",
-        state: "",
-        street: "",
-        country: "",
-      },
-    }));
-  };
-
-  const saveNewAddress = (address) => {
-    if (!address.fullname || !address.contact || !address.street) return;
-    const storedRaw = localStorage.getItem(`${username}_address`);
-    let stored = [];
-    try {
-      stored = Array.isArray(JSON.parse(storedRaw))
-        ? JSON.parse(storedRaw)
-        : [];
-    } catch (err) {
-      stored = [];
-    }
-
-    const isDuplicate = stored.some(
-      (a) =>
-        a.fullname === address.fullname &&
-        a.email === address.email &&
-        a.contact === address.contact &&
-        a.street === address.street
-    );
-
-    if (!isDuplicate) {
-      const updated = [...stored, address];
-      localStorage.setItem(`${username}_address`, JSON.stringify(updated));
-      setSavedAddresses(updated);
-    }
-  };
+    const fetchAddresses = async () => {
+      if (user) {
+        const snap = await getDocs(
+          collection(db, "users", user.uid, "addresses")
+        );
+        setSavedAddresses(snap.docs.map((doc) => doc.data()));
+      }
+    };
+    fetchAddresses();
+  }, [user]);
 
   const calculateItemTotal = (item) => {
-    const price = parseFloat(item?.price || item?.Offer_price || 0);
-    const qty = parseInt(item?.qty) || 1;
+    const price = parseFloat(item?.price || 0);
+    const qty = parseInt(item?.qty || item?.quantity || 1);
     return price * qty;
   };
 
-  const calculateCartTotal = () =>
-    cartItems.reduce((total, item) => total + calculateItemTotal(item), 0);
+  const totalAmount = itemsToCheckout.reduce(
+    (total, item) => total + calculateItemTotal(item),
+    0
+  );
 
-  const totalAmount = calculateCartTotal();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
-  // -------- EMAILJS FUNCTION ---------
+  const autofillAddress = (addr) => {
+    setForm({ ...addr });
+    toast.success("Address autofilled!");
+  };
+
+  const isDuplicateAddress = (newAddr) =>
+    savedAddresses.some((addr) =>
+      Object.keys(newAddr).every((key) => addr[key] === newAddr[key])
+    );
+
+  const saveAddressAfterPayment = async () => {
+    if (!user || isDuplicateAddress(form)) return;
+    try {
+      await addDoc(collection(db, "users", user.uid, "addresses"), form);
+      toast.success("Address saved!");
+    } catch (err) {
+      console.error("Save address error:", err);
+      toast.error("Failed to save address.");
+    }
+  };
+
   const sendInvoiceEmail = (orderData) => {
     const templateParams = {
       to_email: orderData.email,
@@ -132,12 +116,12 @@ const Checkout = () => {
       items: orderData.cartItems
         .map(
           (item) =>
-            `${item.name} (Qty: ${item.qty}) - ₹${(
-              item.qty * item.price
+            `${item.name} (Qty: ${item.qty || item.quantity}) - ₹${(
+              (item.qty || item.quantity) * item.price
             ).toFixed(2)}`
         )
         .join("\n"),
-      address: `${orderData.street}, ${orderData.city}, ${orderData.state}, ${orderData.zip}, ${orderData.country}`,
+      address: `${orderData.shippingAddress.street}, ${orderData.shippingAddress.city}, ${orderData.shippingAddress.state}, ${orderData.shippingAddress.zip}, ${orderData.shippingAddress.country}`,
     };
 
     emailjs
@@ -147,71 +131,106 @@ const Checkout = () => {
         templateParams,
         "isAR5Sy8Y4PABFBmC"
       )
-      .then(
-        (result) => {
-          console.log("Invoice Email Sent!", result.text);
-        },
-        (error) => {
-          console.error("Invoice Email Failed...", error.text);
-        }
-      );
+      .then(() => console.log("Invoice email sent"))
+      .catch((error) => console.error("Email error:", error));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (cartItems.length === 0) {
-      alert("Your cart is empty!");
-      return;
+  const placeOrder = async (paymentId = "") => {
+    const orderId = await generateOrderId();
+    const orderData = {
+      orderId,
+      userId: user.uid,
+      cartItems: itemsToCheckout,
+      totalAmount,
+      paymentMethod,
+      paymentStatus: paymentMethod === "Online Payment" ? "Paid" : "Pending",
+      shippingAddress: form,
+      date: new Date().toISOString(),
+      orderStatus: "Placed",
+      paymentId,
+      email: form.email,
+      fullname: form.fullname,
+    };
+
+    await addDoc(collection(db, "users", user.uid, "orders"), orderData);
+
+    for (const item of itemsToCheckout) {
+      const qty = parseInt(item.qty || item.quantity || 1);
+
+      const productRef = doc(db, "products", item.id);
+      const productSnap = await getDoc(productRef);
+
+      if (productSnap.exists()) {
+        const productData = productSnap.data();
+        let updatedStock = 0;
+
+        if (item.category === "Combo") {
+          updatedStock = Math.max((productData.stock || 0) - qty, 0);
+        } else {
+          const weightInGrams =
+            parseInt(item.selectedWeight?.replace("g", "")) || 0;
+          updatedStock = Math.max(
+            (productData.stock || 0) - qty * weightInGrams,
+            0
+          );
+        }
+
+        await updateDoc(productRef, { stock: updatedStock });
+      }
     }
 
-    const orderData = {
-      ...form,
-      cartItems,
-      totalAmount,
-      orderId: "ODR" + Date.now(),
-      date: new Date().toISOString(),
-    };
+    sendInvoiceEmail(orderData);
+    await saveAddressAfterPayment();
+    if (!checkoutProduct) clearCart();
+    toast.success("Order placed successfully!");
+    navigate("/account", { state: { goToOrders: true } });
+  };
 
-    const ordersKey = `${username}_orders`;
-    const existingOrders = JSON.parse(localStorage.getItem(ordersKey)) || [];
-    existingOrders.push(orderData);
-    localStorage.setItem(ordersKey, JSON.stringify(existingOrders));
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!user) return toast.error("Please log in to place an order.");
+    if (itemsToCheckout.length === 0) return toast.warn("Your cart is empty!");
 
-    const addressToSave = form.delivery === "different" ? form.billing : form;
-    saveNewAddress(addressToSave);
+    setIsPlacingOrder(true);
 
-    const options = {
-      key: "rzp_test_yTS52rDf4bQQKY",
-      amount: totalAmount * 100,
-      currency: "INR",
-      name: "STARTUP_PROJECTS",
-      description: "Order Payment",
-      handler: function () {
-        if (!checkoutProduct) {
-          setCartItems([]);
-        }
-        sendInvoiceEmail(orderData);
-        navigate("/account", { state: { goToOrders: true } });
-      },
-      prefill: {
-        name: form.fullname,
-        email: form.email,
-        contact: form.contact,
-      },
-      notes: {
-        address:
-          form.delivery === "different"
-            ? `${form.billing.street}, ${form.billing.city}, ${form.billing.state}, ${form.billing.zip}`
-            : `${form.street}, ${form.city}, ${form.state}, ${form.zip}`,
-      },
-      theme: { color: "#388e3c" },
-    };
+    try {
+      if (paymentMethod === "Online Payment") {
+        const options = {
+          key: "rzp_test_yTS52rDf4bQQKY",
+          amount: totalAmount * 100,
+          currency: "INR",
+          name: "Kavi DryFruits",
+          description: "Order Payment",
+          handler: async (response) => {
+            await placeOrder(response.razorpay_payment_id);
+            setIsPlacingOrder(false);
+          },
+          prefill: {
+            name: form.fullname,
+            email: form.email,
+            contact: form.contact,
+          },
+          notes: {
+            address: `${form.street}, ${form.city}, ${form.state}, ${form.zip}`,
+          },
+          theme: { color: "#388e3c" },
+        };
 
-    if (window.Razorpay) {
-      const paymentObject = new window.Razorpay(options);
-      paymentObject.open();
-    } else {
-      alert("Razorpay SDK failed to load.");
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.onload = () => {
+          const rzp = new window.Razorpay(options);
+          rzp.open();
+        };
+        document.body.appendChild(script);
+      } else {
+        await placeOrder();
+        setIsPlacingOrder(false);
+      }
+    } catch (err) {
+      console.error("Order error", err);
+      toast.error("Something went wrong. Please try again.");
+      setIsPlacingOrder(false);
     }
   };
 
@@ -221,10 +240,12 @@ const Checkout = () => {
     "Assam",
     "Bihar",
     "Chhattisgarh",
+    "Delhi",
     "Goa",
     "Gujarat",
     "Haryana",
     "Himachal Pradesh",
+    "Jammu & Kashmir",
     "Jharkhand",
     "Karnataka",
     "Kerala",
@@ -241,26 +262,20 @@ const Checkout = () => {
     "Tamil Nadu",
     "Telangana",
     "Tripura",
-    "Uttar Pradesh",
     "Uttarakhand",
+    "Uttar Pradesh",
     "West Bengal",
-    "Andaman and Nicobar Islands",
+    "Andaman & Nicobar",
     "Chandigarh",
-    "Dadra and Nagar Haveli and Daman and Diu",
-    "Delhi",
-    "Jammu and Kashmir",
-    "Ladakh",
+    "Dadra & Nagar Haveli",
+    "Daman & Diu",
     "Lakshadweep",
     "Puducherry",
   ];
 
   return (
     <>
-      <PageHeader
-        title="Check Out Page"
-        subtitle="shop"
-        curpage="Check Out Page"
-      />
+      <PageHeader title="Check Out Page" subtitle="shop" curpage="Check Out Page" />
       <div className="bg-Beach min-h-screen py-10 px-4 sm:px-10 grid md:grid-cols-3 gap-8">
         <form
           onSubmit={handleSubmit}
@@ -268,31 +283,28 @@ const Checkout = () => {
         >
           <h2 className="text-2xl font-bold mb-2">Billing Details</h2>
 
-          {savedAddresses.length > 0 && (
-            <div className="bg-gray-100 p-4 border border-green-400 rounded-md">
-              <h3 className="font-bold text-lg mb-3">Saved Addresses</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                {savedAddresses.map((addr, i) => (
-                  <div
-                    key={i}
-                    onClick={() => handleSelectSavedAddress(addr)}
-                    className="p-3 border border-gray-300 rounded hover:border-green-500 cursor-pointer bg-white"
-                  >
-                    <p className="font-semibold">{addr.fullname}</p>
-                    <p className="text-sm">
-                      {addr.street}, {addr.city}, {addr.state}, {addr.zip},{" "}
-                      {addr.country}
-                    </p>
-                    <p className="text-sm">Phone: {addr.contact}</p>
-                    <p className="text-sm">Email: {addr.email}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <div className="mb-4">
+            <h3 className="font-semibold mb-2">Saved Addresses</h3>
+            {savedAddresses.length > 0 ? (
+              savedAddresses.map((addr, idx) => (
+                <div
+                  key={idx}
+                  className="border p-3 mb-2 rounded cursor-pointer hover:bg-green-50"
+                  onClick={() => autofillAddress(addr)}
+                >
+                  <p className="font-semibold">{addr.fullname}</p>
+                  <p>{`${addr.street}, ${addr.city}, ${addr.state}, ${addr.zip}, ${addr.country}`}</p>
+                  <p>{addr.contact}</p>
+                  <p>{addr.email}</p>
+                </div>
+              ))
+            ) : (
+              <p>No saved addresses found.</p>
+            )}
+          </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
-            {["fullname", "email", "contact", "zip", "city"].map((field) => (
+            {["fullname", "email", "contact", "zip", "city", "street"].map((field) => (
               <div key={field}>
                 <label className="block text-sm font-semibold mb-1">
                   {field.charAt(0).toUpperCase() + field.slice(1)} *
@@ -307,11 +319,8 @@ const Checkout = () => {
                 />
               </div>
             ))}
-
             <div>
-              <label className="block text-sm font-semibold mb-1">
-                State *
-              </label>
+              <label className="block text-sm font-semibold mb-1">State *</label>
               <select
                 name="state"
                 value={form.state}
@@ -320,18 +329,15 @@ const Checkout = () => {
                 required
               >
                 <option value="">Select State</option>
-                {indianStates.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
+                {indianStates.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
                   </option>
                 ))}
               </select>
             </div>
-
             <div>
-              <label className="block text-sm font-semibold mb-1">
-                Country *
-              </label>
+              <label className="block text-sm font-semibold mb-1">Country *</label>
               <select
                 name="country"
                 value={form.country}
@@ -339,132 +345,59 @@ const Checkout = () => {
                 className="w-full border bg-white border-green-400 rounded-md px-3 py-2"
                 required
               >
-                <option value="">Select Country</option>
                 <option value="India">India</option>
               </select>
-            </div>
-
-            <div className="sm:col-span-2">
-              <label className="block text-sm font-semibold mb-1">
-                Street Address *
-              </label>
-              <input
-                type="text"
-                name="street"
-                value={form.street}
-                onChange={handleChange}
-                className="w-full border bg-white border-green-400 rounded-md px-3 py-2"
-                required
-              />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-semibold mb-2">
-              Delivery Address *
-            </label>
-            <div className="flex flex-col sm:flex-row gap-4">
-              {[
-                { label: "Same as shipping address", value: "same" },
-                { label: "Use different billing address", value: "different" },
-              ].map(({ label, value }) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-2 px-3 py-2 border bg-white border-green-400 rounded-md"
-                >
+            <label className="block text-sm font-semibold mb-1">Payment Method *</label>
+            <div className="flex gap-4">
+              {["Online Payment", "Cash on Delivery"].map((method) => (
+                <label key={method}>
                   <input
                     type="radio"
-                    name="delivery"
-                    value={value}
-                    checked={form.delivery === value}
-                    onChange={handleChange}
-                    className="accent-green-600"
+                    name="paymentMethod"
+                    value={method}
+                    checked={paymentMethod === method}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className="mr-1"
                   />
-                  {label}
+                  {method}
                 </label>
               ))}
             </div>
           </div>
 
-          {form.delivery === "different" && (
-            <div className="bg-gray-50 p-4 rounded-md border border-green-400 grid sm:grid-cols-2 gap-4">
-              <h4 className="col-span-2 font-semibold text-lg mb-2">
-                Billing Address
-              </h4>
-
-              {["fullname", "email", "contact", "zip", "city"].map((field) => (
-                <div key={field}>
-                  <label className="block text-sm font-semibold mb-1">
-                    {field.charAt(0).toUpperCase() + field.slice(1)} *
-                  </label>
-                  <input
-                    type="text"
-                    name={`billing.${field}`}
-                    value={form.billing[field]}
-                    onChange={handleChange}
-                    className="w-full border bg-white border-green-400 rounded-md px-3 py-2"
-                    required
-                  />
-                </div>
-              ))}
-
-              <div>
-                <label className="block text-sm font-semibold mb-1">
-                  State *
-                </label>
-                <select
-                  name="billing.state"
-                  value={form.billing.state}
-                  onChange={handleChange}
-                  className="w-full border bg-white border-green-400 rounded-md px-3 py-2"
-                  required
-                >
-                  <option value="">Select State</option>
-                  {indianStates.map((state) => (
-                    <option key={state} value={state}>
-                      {state}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-1">
-                  Country *
-                </label>
-                <select
-                  name="billing.country"
-                  value={form.billing.country}
-                  onChange={handleChange}
-                  className="w-full border bg-white border-green-400 rounded-md px-3 py-2"
-                  required
-                >
-                  <option value="">Select Country</option>
-                  <option value="India">India</option>
-                </select>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-semibold mb-1">
-                  Street Address *
-                </label>
-                <input
-                  type="text"
-                  name="billing.street"
-                  value={form.billing.street}
-                  onChange={handleChange}
-                  className="w-full border bg-white border-green-400 rounded-md px-3 py-2"
-                  required
-                />
-              </div>
-            </div>
-          )}
-
           <button
             type="submit"
-            className="w-full mt-4 bg-green-600 text-white py-2 rounded-md font-semibold hover:bg-green-700"
+            className={`w-full px-6 py-2 rounded mt-4 transition text-white font-semibold ${
+              isPlacingOrder ? "bg-gray-400 cursor-not-allowed" : "bg-green-700 hover:bg-green-800"
+            }`}
+            disabled={isPlacingOrder}
           >
-            Place Order
+            {isPlacingOrder ? (
+              <div className="flex items-center justify-center gap-2">
+                <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4l3.5-3.5L12 0v4a8 8 0 018 8h-4l3.5 3.5L20 12h-4a8 8 0 01-8 8v-4l-3.5 3.5L4 12z"
+                  />
+                </svg>
+                Processing...
+              </div>
+            ) : (
+              `Place Order (₹${totalAmount.toFixed(2)})`
+            )}
           </button>
         </form>
 
@@ -472,23 +405,29 @@ const Checkout = () => {
           <h3 className="text-xl font-bold mb-4">Order Summary</h3>
           <div className="space-y-2 text-sm font-medium">
             <div className="flex justify-between">
-              <span>Items</span> <span>{cartItems.length}</span>
+              <span>Items</span>
+              <span>{itemsToCheckout.length}</span>
             </div>
             <div className="flex justify-between">
-              <span>Sub Total</span> <span>₹{totalAmount.toFixed(2)}</span>
+              <span>Sub Total</span>
+              <span>₹{totalAmount.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
-              <span>Shipping</span> <span>₹00.00</span>
+              <span>Shipping</span>
+              <span>₹00.00</span>
             </div>
             <div className="flex justify-between">
-              <span>Taxes</span> <span>₹00.00</span>
+              <span>Taxes</span>
+              <span>₹00.00</span>
             </div>
             <div className="flex justify-between text-red-600">
-              <span>Coupon Discount</span> <span>-₹00.00</span>
+              <span>Coupon Discount</span>
+              <span>-₹00.00</span>
             </div>
             <hr className="border-dashed border-green-400 my-4" />
             <div className="flex justify-between text-lg font-bold">
-              <span>Total</span> <span>₹{totalAmount.toFixed(2)}</span>
+              <span>Total</span>
+              <span>₹{totalAmount.toFixed(2)}</span>
             </div>
           </div>
         </div>

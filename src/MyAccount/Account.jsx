@@ -4,6 +4,19 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import PageHeader from "../Component/PageHeader";
 import Services from "../Home/Services";
 import { useLocation } from "react-router-dom";
+import { auth, db } from "../firebase";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  setDoc,
+  deleteDoc,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { toast } from "react-hot-toast";
 
 const Account = () => {
   const [activeTab, setActiveTab] = useState("personal");
@@ -13,7 +26,6 @@ const Account = () => {
     password: "",
   });
   const [allOrders, setAllOrders] = useState([]);
-  const [selectedIndex, setSelectedIndex] = useState(null);
   const [addresses, setAddresses] = useState([]);
   const [newAddress, setNewAddress] = useState({
     fullname: "",
@@ -26,37 +38,53 @@ const Account = () => {
     country: "",
   });
   const [editingIndex, setEditingIndex] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
   const [passwordFields, setPasswordFields] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
-  const username = localStorage.getItem("username");
   const location = useLocation();
+  const userId = auth.currentUser?.uid;
 
   useEffect(() => {
-    const users = JSON.parse(localStorage.getItem("RegisterUser")) || [];
-    const found = users.find((u) => u.username === username);
-    if (found) setUserInfo(found);
-
-    const storedOrders =
-      JSON.parse(localStorage.getItem(`${username}_orders`)) || [];
-    setAllOrders(storedOrders.reverse());
-
-    const addrArr =
-      JSON.parse(localStorage.getItem(`${username}_address`)) || [];
-    setAddresses(addrArr);
-  }, [username]);
+    if (!userId) return;
+    const fetchData = async () => {
+      const userDoc = await getDoc(doc(db, "users", userId));
+      setUserInfo(userDoc.data() || {});
+      const ordersSnap = await getDocs(
+        collection(db, "users", userId, "orders")
+      );
+      const orders = ordersSnap.docs.map((doc) => ({
+        ...doc.data(),
+        showReviewForm: false,
+      }));
+      setAllOrders(orders.reverse());
+      const addressSnap = await getDocs(
+        collection(db, "users", userId, "addresses")
+      );
+      const addrs = addressSnap.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setAddresses(addrs);
+    };
+    fetchData();
+  }, [userId]);
 
   useEffect(() => {
-    if (location.state?.goToOrders) {
-      setActiveTab("orders");
-    }
+    if (location.state?.goToOrders) setActiveTab("orders");
   }, [location]);
 
-  const saveAddresses = (list) => {
+  const saveAddresses = async (list) => {
+    if (!userId) return;
+    const addressCol = collection(db, "users", userId, "addresses");
+    const docsSnap = await getDocs(addressCol);
+    await Promise.all(docsSnap.docs.map((docSnap) => deleteDoc(docSnap.ref)));
+    await Promise.all(
+      list.map((addr, idx) => setDoc(doc(addressCol, `addr-${idx}`), addr))
+    );
     setAddresses(list);
-    localStorage.setItem(`${username}_address`, JSON.stringify(list));
   };
 
   const handleNewAddressChange = (e) => {
@@ -67,20 +95,23 @@ const Account = () => {
   const handleAddOrUpdateAddress = () => {
     const updated = { ...newAddress };
     if (!updated.fullname || !updated.contact || !updated.street) return;
-
     let currentAddresses = Array.isArray(addresses) ? addresses : [];
     if (editingIndex !== null) {
       currentAddresses[editingIndex] = updated;
     } else {
       currentAddresses = [...currentAddresses, updated];
     }
-
-    setAddresses(currentAddresses);
-    localStorage.setItem(
-      `${username}_address`,
-      JSON.stringify(currentAddresses)
-    );
-    setNewAddress({});
+    saveAddresses(currentAddresses);
+    setNewAddress({
+      fullname: "",
+      contact: "",
+      email: "",
+      city: "",
+      zip: "",
+      state: "",
+      street: "",
+      country: "",
+    });
     setEditingIndex(null);
   };
 
@@ -100,7 +131,7 @@ const Account = () => {
     setPasswordFields((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePasswordUpdate = () => {
+  const handlePasswordUpdate = async () => {
     const { currentPassword, newPassword, confirmPassword } = passwordFields;
     if (
       !currentPassword ||
@@ -108,111 +139,141 @@ const Account = () => {
       newPassword !== confirmPassword ||
       currentPassword !== userInfo.password
     ) {
-      return alert("Check all fields and confirm password entries.");
+      toast.error("Please check all fields and ensure passwords match.");
+      return;
     }
-    const users = JSON.parse(localStorage.getItem("RegisterUser")) || [];
-    const updated = users.map((u) =>
-      u.username === username ? { ...u, password: newPassword } : u
-    );
-    localStorage.setItem("RegisterUser", JSON.stringify(updated));
-    setUserInfo((prev) => ({ ...prev, password: newPassword }));
-    setPasswordFields({
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    });
-    alert("Password updated!");
-  };
-
-  const removerOrder = (productId) => {
-    const updatedOrders = allOrders.filter(
-      (item) => item.orderId !== productId
-    );
-    setAllOrders(updatedOrders);
-    localStorage.setItem(`${username}_orders`, JSON.stringify(updatedOrders));
+    try {
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, { password: newPassword });
+      setUserInfo((prev) => ({ ...prev, password: newPassword }));
+      setPasswordFields({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+      toast.success("Password updated successfully!");
+    } catch (err) {
+      toast.error("Error updating password.");
+    }
   };
 
   const handlePrint = (order, e) => {
     e.stopPropagation();
     const printWindow = window.open("", "", "width=800,height=600");
-    const content = `
-      <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kavis Dry Fruits - Invoice</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      color: #333;
-    }
-    h2 {
-      text-align: center;
-      color: #222;
-    }
-    .item-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-    hr {
-      border: 0;
-      border-top: 1px solid #ddd;
-      margin: 15px 0;
-    }
-    .total {
-      text-align: right;
-      font-weight: bold;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-    .thank-you {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 14px;
-      color: #555;
-    }
-    footer {
-      position: absolute;
-      bottom: 10px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      font-size: 12px;
-      color: #999;
-      border-top: 1px solid #ccc;
-      padding-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <h2>Invoice - Order ID: ${order.orderId}</h2>
-  <p><strong>Date:</strong> ${order.date}</p>
-  <hr />
-  ${order.cartItems
-    .map(
-      (item) => `
-      <div class="item-row">
-        <span>${item.name} (x${item.qty})</span>
-        <span>₹${(item.qty * item.price).toFixed(2)}</span>
-      </div>`
-    )
-    .join("")}
-  <hr />
-  <div class="total">Total: ₹${order.totalAmount.toFixed(2)}</div>
-
-  <p class="thank-you">Thank You For Your Order!</p>
-
-  <footer>Printed on: ${new Date().toLocaleString()}</footer>
-</body>
-</html>`;
-
+    const content = `<html><body><h2>Invoice - ${
+      order.orderId
+    }</h2><p>Date: ${new Date(order.date).toLocaleString()}</p>${order.cartItems
+      .map(
+        (item) =>
+          `<div>${item.name} x${item.qty || item.quantity} - ₹${(
+            item.qty * item.price
+          ).toFixed(2)}</div>`
+      )
+      .join("")}<p>Total: ₹${order.totalAmount.toFixed(2)}</p></body></html>`;
     printWindow.document.write(content);
     printWindow.document.close();
     printWindow.print();
+  };
+
+  const cancelOrder = async (orderId, reason, index) => {
+    try {
+      const ordersRef = collection(db, "users", userId, "orders");
+      const snap = await getDocs(ordersRef);
+      const docRef = snap.docs.find((d) => d.data().orderId === orderId);
+
+      if (docRef) {
+        const cancelledOrder = {
+          ...docRef.data(),
+          orderStatus: "Cancelled",
+          cancelReason: reason,
+          cancelledAt: new Date().toISOString(),
+          userId,
+        };
+
+        // Step 1: Update order status in user's orders
+        await updateDoc(docRef.ref, {
+          orderStatus: "Cancelled",
+          cancelReason: reason,
+        });
+
+        // Step 2: Add the cancelled order to the cancelOrders DB
+        await addDoc(collection(db, "cancelOrders"), cancelledOrder);
+
+        // Step 3: Update local state
+        const updated = [...allOrders];
+        updated[index].orderStatus = "Cancelled";
+        updated[index].cancelReason = reason;
+        setAllOrders(updated);
+
+        toast.success("Order cancelled and moved to cancelOrders!");
+      }
+    } catch (err) {
+      console.error("Cancel order failed:", err);
+      toast.error("Failed to cancel order.");
+    }
+  };
+
+  const AddReviewForm = ({ onReviewSubmitted, order, userInfo, userId }) => {
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmitReview = async () => {
+      if (!message.trim()) return toast.error("Review message cannot be empty");
+      if (!order?.orderId || !userId) {
+        return toast.error("Missing order or user information.");
+      }
+
+      setLoading(true);
+      try {
+        await addDoc(collection(db, "reviews"), {
+          name: userInfo?.username || "Anonymous",
+          userId: userId,
+          orderId: order.orderId,
+          message: message.trim(),
+          createdAt: serverTimestamp(),
+          selected: false, // Default: not shown in public testimonials
+        });
+
+        toast.success("Review submitted successfully!");
+        setMessage("");
+        onReviewSubmitted?.(); // callback to hide review form
+      } catch (error) {
+        console.error("Error submitting review:", error);
+        toast.error("Error submitting review. Try again.");
+      }
+      setLoading(false);
+    };
+
+    return (
+      <div className="space-y-3">
+        <div>
+          <label className="block text-sm font-medium mb-1">Name</label>
+          <input
+            type="text"
+            value={userInfo?.username || "Anonymous"}
+            disabled
+            className="bg-gray-100 w-full px-3 py-2 border rounded"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">Review</label>
+          <textarea
+            rows="4"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="w-full px-3 py-2 border rounded"
+            placeholder="Write your feedback here..."
+          />
+        </div>
+        <button
+          onClick={handleSubmitReview}
+          disabled={loading}
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        >
+          {loading ? "Submitting..." : "Submit Review"}
+        </button>
+      </div>
+    );
   };
 
   const tabs = [
@@ -221,7 +282,6 @@ const Account = () => {
     { key: "address", label: "Manage Address" },
     { key: "password", label: "Password Manager" },
   ];
-
   const renderContent = () => {
     const firstName = userInfo.username.split(" ")[0] || "";
     const lastName = userInfo.username.split(" ")[1] || "";
@@ -276,17 +336,17 @@ const Account = () => {
               </div>
 
               <div className="flex flex-col col-span-2">
-                <label className="text-sm font-bold mb-1">Phone No *</label>
+                <label className="text-sm font-bold mb-1">Password</label>
                 <input
                   type="text"
-                  placeholder="12345-67890"
+                 defaultValue={userInfo.password}
                   className="border border-green-300 rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
                 />
               </div>
 
               <div className="flex flex-col col-span-2">
                 <label className="text-sm font-bold mb-1">
-                  Alternative Phone No{" "}
+                 Phone No *{" "}
                 </label>
                 <input
                   type="text"
@@ -304,7 +364,6 @@ const Account = () => {
             </div>
           </div>
         );
-
       case "orders":
         return (
           <div className="bg-white min-h-screen py-10 px-4 rounded-xl">
@@ -331,54 +390,185 @@ const Account = () => {
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-col md:flex-row items-center gap-3">
                       <button
                         onClick={(e) => handlePrint(order, e)}
-                        className="flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white text-sm px-6 py-3 rounded"
+                        className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded"
                       >
                         <FaPrint /> Invoice
                       </button>
 
-                      {/* ✅ Fix applied here */}
-                      <button
-                        onClick={() => removerOrder(order.orderId)}
-                        className="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-3.5 rounded"
-                      >
-                        <RiDeleteBinLine />
-                      </button>
+                      {/* Cancel Button & Reason */}
+                      {order.orderStatus !== "Cancelled" &&
+                        order.orderStatus !== "Delivered" && (
+                          <>
+                            {!order.showCancelReason ? (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const updated = [...allOrders];
+                                  updated[index].showCancelReason = true;
+                                  setAllOrders(updated);
+                                }}
+                                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm"
+                              >
+                                Cancel Order
+                              </button>
+                            ) : (
+                              <div className="bg-red-50 p-3 border border-red-300 rounded w-full md:w-64">
+                                <label className="block text-xs font-semibold mb-1">
+                                  Reason for cancellation
+                                </label>
+                                <textarea
+                                  className="w-full border border-red-300 rounded p-1 text-sm mb-2"
+                                  placeholder="Enter your reason..."
+                                  onChange={(e) => {
+                                    const updated = [...allOrders];
+                                    updated[index].cancelReason =
+                                      e.target.value;
+                                    setAllOrders(updated);
+                                  }}
+                                />
+                                <button
+                                  className="w-full bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (
+                                      !order.cancelReason ||
+                                      order.cancelReason.trim() === ""
+                                    ) {
+                                      return toast.error(
+                                        "Please enter a cancellation reason."
+                                      );
+                                    }
+                                    cancelOrder(
+                                      order.orderId,
+                                      order.cancelReason,
+                                      index
+                                    );
+                                  }}
+                                >
+                                  Confirm Cancel
+                                </button>
+                              </div>
+                            )}
+                          </>
+                        )}
+
+                      {/* Status Icon */}
+                      <div className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded text-sm font-medium mt-2 md:mt-0">
+                        {order.orderStatus === "Placed" && (
+                          <>
+                            <span className="text-yellow-600">🛒</span>
+                            <span className="text-yellow-600">Placed</span>
+                          </>
+                        )}
+                        {order.orderStatus === "Packing" && (
+                          <>
+                            <span className="text-purple-600">📦</span>
+                            <span className="text-purple-600">Packing</span>
+                          </>
+                        )}
+                        {order.orderStatus === "Shipped" && (
+                          <>
+                            <span className="text-blue-600">🚚</span>
+                            <span className="text-blue-600">Shipped</span>
+                          </>
+                        )}
+                        {order.orderStatus === "Out for Delivery" && (
+                          <>
+                            <span className="text-orange-600">🛵</span>
+                            <span className="text-orange-600">
+                              Out for Delivery
+                            </span>
+                          </>
+                        )}
+                        {order.orderStatus === "Delivered" && (
+                          <>
+                            <span className="text-green-600">✅</span>
+                            <span className="text-green-600">Delivered</span>
+                          </>
+                        )}
+                        {order.orderStatus === "Cancelled" && (
+                          <>
+                            <span className="text-red-600">❌</span>
+                            <span className="text-red-600">Cancelled</span>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Order Details (Only visible when selected) */}
+                  {/* Order details */}
                   {selectedIndex === index && (
                     <div className="bg-white px-6 py-4">
                       <div className="divide-y">
+                        <h1 className="text-lg font-bold mb-4">
+                          Order Status Tracker
+                        </h1>
+                        <div className="flex items-center justify-between relative mx-4">
+                          {[
+                            "Placed",
+                            "Packed",
+                            "Shipped",
+                            "Out for Delivery",
+                            "Delivered",
+                          ].map((step, idx, arr) => {
+                            const isActive =
+                              [
+                                "Placed",
+                                "Packed",
+                                "Shipped",
+                                "Out for Delivery",
+                                "Delivered",
+                              ].indexOf(order.orderStatus) >= idx;
+
+                            return (
+                              <div
+                                key={idx}
+                                className="flex-1 flex flex-col items-center relative"
+                              >
+                                <div
+                                  className={`w-8 h-8 flex items-center justify-center rounded-full text-white text-sm z-10 ${
+                                    isActive ? "bg-green-600" : "bg-gray-300"
+                                  }`}
+                                >
+                                  {idx + 1}
+                                </div>
+                                <p className="mt-2 text-xs text-center">
+                                  {step}
+                                </p>
+                                {idx !== arr.length - 1 && (
+                                  <div
+                                    className={`absolute top-4 left-full h-1 w-full transform -translate-x-1/2 ${
+                                      isActive ? "bg-green-600" : "bg-gray-300"
+                                    }`}
+                                  ></div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+
                         {order.cartItems.map((item) => (
                           <div
                             key={item.id}
                             className="flex items-center justify-between py-4"
                           >
-                            <div className="flex items-center">
-                              <img
-                                src={item.img || "/placeholder.png"}
-                                alt={item.name}
-                                className="w-14 h-14 object-cover rounded mr-4"
-                              />
-                              <div>
-                                <p className="font-medium">{item.name}</p>
-                                <p className="text-sm text-gray-500">
-                                  Qty: {item.qty}
-                                </p>
-                              </div>
+                            <div>
+                              <p className="font-medium">{item.name}</p>
+                              <p className="text-sm text-gray-500">
+                                Qty: {item.quantity}
+                              </p>
                             </div>
                             <p className="text-orange-600 font-semibold">
-                              ₹{(item.qty * item.price).toFixed(2)}
+                              ₹{(item.quantity * item.price).toFixed(2)}
                             </p>
                           </div>
                         ))}
                       </div>
 
-                      {/* Totals Section */}
+                      {/* Price Summary */}
                       <div className="mt-6 text-sm text-gray-700 space-y-2">
                         <div className="flex justify-between">
                           <span>Shipping</span>
@@ -397,6 +587,38 @@ const Account = () => {
                           <span>₹{order.totalAmount.toFixed(2)}</span>
                         </div>
                       </div>
+
+                      {/* Add Review */}
+                      {order.orderStatus === "Delivered" && (
+                        <div className="mt-6 p-4 bg-green-50 border border-green-300 rounded space-y-4">
+                          <h3 className="text-lg font-bold text-green-700">
+                            Add Review
+                          </h3>
+                          {!order.showReviewForm ? (
+                            <button
+                              onClick={() => {
+                                const updatedOrders = [...allOrders];
+                                updatedOrders[index].showReviewForm = true;
+                                setAllOrders(updatedOrders);
+                              }}
+                              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                            >
+                              Add Review
+                            </button>
+                          ) : (
+                            <AddReviewForm
+                              order={order}
+                              userInfo={userInfo}
+                              userId={userId}
+                              onReviewSubmitted={() => {
+                                const updatedOrders = [...allOrders];
+                                updatedOrders[index].showReviewForm = false;
+                                setAllOrders(updatedOrders);
+                              }}
+                            />
+                          )}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -570,7 +792,6 @@ const Account = () => {
             </button>
           </div>
         </div>
-
         <div className="w-full lg:w-2/3 bg-white p-4 rounded-xl shadow">
           {renderContent()}
         </div>
@@ -579,5 +800,4 @@ const Account = () => {
     </>
   );
 };
-
 export default Account;

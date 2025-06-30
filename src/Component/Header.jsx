@@ -8,22 +8,32 @@ import {
 } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
+  // Real Firebase Auth State Checker
   useEffect(() => {
-    const auth = localStorage.getItem("isAuthenticated");
-    setIsAuthenticated(auth === "true");
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user); // true if user exists
+    });
+
+    // Cleanup on unmount
+    return () => unsubscribe();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("username");
-    setIsAuthenticated(false);
-    navigate("/");
-    window.location.reload();
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setIsAuthenticated(false);
+      navigate("/");
+      window.location.reload();
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
@@ -70,7 +80,10 @@ const Header = () => {
           <div className="flex items-center space-x-2">
             <span className="text-green2">|</span>
             {isAuthenticated ? (
-              <button onClick={handleLogout} className="hover:text-green-200">
+              <button
+                onClick={handleLogout}
+                className="hover:text-green-200"
+              >
                 Logout
               </button>
             ) : (

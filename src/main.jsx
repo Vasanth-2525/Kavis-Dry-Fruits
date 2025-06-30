@@ -22,8 +22,9 @@ import About_Us from "./About Us/About_Us.jsx";
 import Combos from "./Combos/Combos.jsx";
 import Offers from "./Offers/Offers.jsx";
 import SingleComboProduct from "./Combos/SingleComboProduct.jsx";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Adminpanel from "./Admin/AdminPanel.jsx";
+import { Toaster } from "react-hot-toast";
+import ViewInvoice from "./Admin/ViewInvoice.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: "/combos", element: <Combos /> },
       { path: "/combos/:id", element: <SingleComboProduct /> },
       { path: "/offers", element: <Offers /> },
+
       {
         path: "/account",
         element: (
@@ -84,22 +86,25 @@ const router = createBrowserRouter([
   },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
+  { path: "/adminpanel", element: <Adminpanel /> },
+  { path: "/admin/invoice", element: <ViewInvoice /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <StoreProvider>
       <RouterProvider router={router} />
-      <ToastContainer 
-        position="top-right" 
-        autoClose={1000} 
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: "#333",
+            color: "#fff",
+            borderRadius: "10px",
+            fontSize: "14px",
+          },
+          duration: 2000,
+        }}
       />
     </StoreProvider>
   </React.StrictMode>

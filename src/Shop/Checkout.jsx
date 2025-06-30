@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useStore } from "../Context/StoreContext";
 import PageHeader from "../Component/PageHeader";
 import { useNavigate, useLocation } from "react-router-dom";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import {
   collection,
   addDoc,

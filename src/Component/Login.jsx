@@ -3,7 +3,12 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import LoginBg from "/images/Login.jpg";
 import { auth, provider, db } from "../firebase";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  EmailAuthProvider,
+  linkWithCredential,
+} from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const Login = () => {
@@ -14,57 +19,41 @@ const Login = () => {
   const [messageType, setMessageType] = useState("");
   const navigate = useNavigate();
 
-  // Function to check Firestore User Doc and set Role
   const checkAndSetRole = async (user) => {
     const userDocRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userDocRef);
 
-    // If user doc exists
+    const role = user.email === "vasanthlogan2525@gmail.com" ? "Admin" : "User";
+
     if (userSnap.exists()) {
       const userData = userSnap.data();
       if (!userData.role) {
-        const role = user.email === "vasanthlogan2525@gmail.com" ? "Admin" : "User";
         await setDoc(userDocRef, { ...userData, role }, { merge: true });
         console.log("Role updated to:", role);
       }
     } else {
-      // If no doc, create new with role
-      const role = user.email === "vasanthlogan2525@gmail.com" ? "Admin" : "User";
       await setDoc(userDocRef, {
         username: user.displayName || "No Name",
         email: user.email,
-        role: role,
-        password:`${user.displayName}123`,
+        role,
         createdAt: new Date(),
       });
       console.log("New user created with role:", role);
     }
   };
 
-  // Email/Password Login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      await checkAndSetRole(user); 
+      await checkAndSetRole(user);
 
       setMessage("Login Successful!");
       setMessageType("success");
 
-      
-      const userDocRef = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userDocRef);
-      const userData = userSnap.data();
-
-      setTimeout(() => {
-        if (userData?.role === "Admin") {
-          navigate("/adminpanel");
-        } else {
-          navigate("/");
-        }
-      }, 1000);
+      const userData = (await getDoc(doc(db, "users", user.uid))).data();
+      setTimeout(() => navigate(userData?.role === "Admin" ? "/adminpanel" : "/"), 1000);
     } catch (error) {
       setMessage("Invalid email or password.");
       setMessageType("error");
@@ -72,33 +61,37 @@ const Login = () => {
     }
   };
 
-  // Google Sign In
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      await checkAndSetRole(user); 
+      await checkAndSetRole(user);
+
+      const hasPasswordProvider = user.providerData.some(
+        (provider) => provider.providerId === "password"
+      );
+
+      if (!hasPasswordProvider) {
+        const newPassword = prompt("You've logged in with Google. Set a password for future email login:");
+        if (newPassword && newPassword.length >= 6) {
+          const credential = EmailAuthProvider.credential(user.email, newPassword);
+          await linkWithCredential(user, credential);
+          alert("Password linked successfully.");
+        } else {
+          alert("Password too short or not set.");
+        }
+      }
 
       setMessage("Login Successful via Google!");
       setMessageType("success");
 
-     
-      const userDocRef = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userDocRef);
-      const userData = userSnap.data();
-
-      setTimeout(() => {
-        if (userData?.role === "Admin") {
-          navigate("/adminpanel");
-        } else {
-          navigate("/");
-        }
-      }, 1000);
+      const userData = (await getDoc(doc(db, "users", user.uid))).data();
+      setTimeout(() => navigate(userData?.role === "Admin" ? "/adminpanel" : "/"), 1000);
     } catch (error) {
+      console.error("Google Sign-In error:", error);
       setMessage("Google Sign-In failed.");
       setMessageType("error");
-      console.error("Google Sign-In error:", error);
     }
   };
 
@@ -121,6 +114,7 @@ const Login = () => {
               className="w-24 h-auto mx-auto md:mx-0"
             />
           </div>
+
           <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center md:text-left">
             Log In
           </h2>
@@ -172,7 +166,7 @@ const Login = () => {
                 />
                 <span
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer select-none"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
@@ -184,10 +178,7 @@ const Login = () => {
                 <input type="checkbox" required className="mr-2" />
                 Remember me
               </label>
-              <Link
-                to="/forgot-password"
-                className="text-green-600 hover:underline"
-              >
+              <Link to="/forgot-password" className="text-green-600 hover:underline">
                 Forgot Password?
               </Link>
             </div>
@@ -219,7 +210,7 @@ const Login = () => {
 
           <p className="text-sm text-center text-gray-600 mt-6">
             Don’t have an account?{" "}
-            <Link className="text-green-600 hover:underline font-medium" to="/register">
+            <Link to="/register" className="text-green-600 hover:underline font-medium">
               Sign Up
             </Link>
           </p>

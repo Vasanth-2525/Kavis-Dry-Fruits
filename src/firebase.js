@@ -9,10 +9,10 @@ const firebaseConfig = {
   apiKey: "AIzaSyB7nkWb3Ce43JDhsNi9zrQ3W5tR10ivHA0",
   authDomain: "kavisdryfurits.firebaseapp.com",
   projectId: "kavisdryfurits",
-  storageBucket: "kavisdryfurits.appspot.com",
+  storageBucket: "kavisdryfurits.appspot.com", // ✅ Corrected
   messagingSenderId: "769801543519",
   appId: "1:769801543519:web:8beff84a084dee83ad60ea",
-  measurementId: "G-9PFN97BGCL"
+  measurementId: "G-9PFN97BGCL",
 };
 
 // ✅ Initialize Firebase app

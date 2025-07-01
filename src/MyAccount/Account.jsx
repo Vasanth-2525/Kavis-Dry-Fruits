@@ -15,6 +15,7 @@ import {
   deleteDoc,
   addDoc,
   serverTimestamp,
+  onSnapshot,
 } from "firebase/firestore";
 import { toast } from "react-hot-toast";
 
@@ -49,17 +50,22 @@ const Account = () => {
 
   useEffect(() => {
     if (!userId) return;
+
     const fetchData = async () => {
       const userDoc = await getDoc(doc(db, "users", userId));
       setUserInfo(userDoc.data() || {});
-      const ordersSnap = await getDocs(
-        collection(db, "users", userId, "orders")
-      );
-      const orders = ordersSnap.docs.map((doc) => ({
-        ...doc.data(),
-        showReviewForm: false,
-      }));
-      setAllOrders(orders.reverse());
+
+      // Live orders
+      const ordersRef = collection(db, "users", userId, "orders");
+      const unsubscribeOrders = onSnapshot(ordersRef, (snapshot) => {
+        const orders = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          showReviewForm: false,
+        }));
+        setAllOrders(orders.reverse());
+      });
+
+      // Addresses (optional to make live too)
       const addressSnap = await getDocs(
         collection(db, "users", userId, "addresses")
       );
@@ -68,7 +74,11 @@ const Account = () => {
         ...doc.data(),
       }));
       setAddresses(addrs);
+
+      // Cleanup on unmount
+      return () => unsubscribeOrders();
     };
+
     fetchData();
   }, [userId]);
 
@@ -226,17 +236,17 @@ const Account = () => {
       setLoading(true);
       try {
         await addDoc(collection(db, "reviews"), {
-          name: userInfo?.username || "Anonymous",
+          userName: userInfo?.username || "Anonymous",
           userId: userId,
           orderId: order.orderId,
-          message: message.trim(),
+          comment: message.trim(),
           createdAt: serverTimestamp(),
-          selected: false, // Default: not shown in public testimonials
+          selected: false,
         });
 
         toast.success("Review submitted successfully!");
         setMessage("");
-        onReviewSubmitted?.(); // callback to hide review form
+        onReviewSubmitted?.();
       } catch (error) {
         console.error("Error submitting review:", error);
         toast.error("Error submitting review. Try again.");
@@ -313,6 +323,7 @@ const Account = () => {
                 <input
                   type="text"
                   defaultValue={firstName}
+                  readOnly
                   className="border border-green-300 rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
                 />
               </div>
@@ -322,6 +333,7 @@ const Account = () => {
                 <input
                   type="text"
                   defaultValue={lastName}
+                  readOnly
                   className="border border-green-300 rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
                 />
               </div>
@@ -331,23 +343,22 @@ const Account = () => {
                 <input
                   type="email"
                   defaultValue={userInfo.email}
+                  readOnly
                   className="border border-green-300 rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
                 />
               </div>
 
               <div className="flex flex-col col-span-2">
-                <label className="text-sm font-bold mb-1">Password</label>
+                <label className="text-sm font-bold mb-1">Phone No * </label>
                 <input
                   type="text"
-                 defaultValue={userInfo.password}
+                  placeholder="12345-67890"
                   className="border border-green-300 rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
                 />
               </div>
 
               <div className="flex flex-col col-span-2">
-                <label className="text-sm font-bold mb-1">
-                 Phone No *{" "}
-                </label>
+                <label className="text-sm font-bold mb-1">Alternative Number </label>
                 <input
                   type="text"
                   placeholder="12345-67890"

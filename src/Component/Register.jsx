@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import Registerbg from "/images/Register.jpg";
 
 const generateOTP = () =>
@@ -29,8 +28,20 @@ const Register = () => {
   const handleSendOtp = async (e) => {
     e.preventDefault();
 
+    if (!firstName || !lastName || !email || !password) {
+      setMessage("Please fill all fields.");
+      setMessageType("error");
+      return;
+    }
+
     if (!email.includes("@")) {
-      setMessage("Please enter a valid email.");
+      setMessage("Invalid email address.");
+      setMessageType("error");
+      return;
+    }
+
+    if (password.length < 6) {
+      setMessage("Password must be at least 6 characters.");
       setMessageType("error");
       return;
     }
@@ -44,11 +55,10 @@ const Register = () => {
     const otp = generateOTP();
     setGeneratedOtp(otp);
 
-    // Send OTP via EmailJS
-    emailjs
-      .send(
+    try {
+      await emailjs.send(
         "service_a6grxsl",
-        "template_gi7vneo",
+        "template_gi7vneo", 
         {
           first_name: firstName,
           last_name: lastName,
@@ -56,51 +66,58 @@ const Register = () => {
           user_password: password,
           otp: otp,
         },
-        "isAR5Sy8Y4PABFBmC"
-      )
-      .then(() => {
-        setOtpSent(true);
-        setMessage(`OTP sent to ${email}`);
-        setMessageType("success");
-      })
-      .catch(() => {
-        setMessage("Failed to send OTP. Try again.");
-        setMessageType("error");
-      });
+        "isAR5Sy8Y4PABFBmC" 
+      );
+
+      setOtpSent(true);
+      setMessage(`OTP sent to ${email}`);
+      setMessageType("success");
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setMessage("Failed to send OTP. Please try again.");
+      setMessageType("error");
+    }
   };
 
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
 
-    if (enteredOtp === generatedOtp) {
-      try {
-        // Firebase Auth Email/Password creation
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        const user = userCredential.user;
+    if (enteredOtp !== generatedOtp) {
+      setMessage("Incorrect OTP. Please try again.");
+      setMessageType("error");
+      return;
+    }
 
-        // Save user data in Firestore
-        await setDoc(doc(db, "users", user.uid), {
-          username: `${firstName} ${lastName}`,
-          email: email,
-          createdAt: new Date(),
-        });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-        // No need to manually create subcollections (Firestore best practice)
+      const user = userCredential.user;
 
-        setMessage("OTP verified! Registration successful.");
-        setMessageType("success");
+      await setDoc(doc(db, "users", user.uid), {
+        username: `${firstName} ${lastName}`,
+        email: email,
+        isVerified: true,
+        createdAt: serverTimestamp(),
+      });
 
-        setTimeout(() => navigate("/login"), 1000);
-      } catch (error) {
-        setMessage("Registration failed: " + error.message);
-        setMessageType("error");
+      setMessage("Registration successful!");
+      setMessageType("success");
+
+      setTimeout(() => navigate("/login"), 1500);
+    } catch (error) {
+      let errorMsg = "Registration failed.";
+      if (error.code === "auth/email-already-in-use") {
+        errorMsg = "Email is already registered.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMsg = "Invalid email format.";
+      } else if (error.code === "auth/weak-password") {
+        errorMsg = "Password should be at least 6 characters.";
       }
-    } else {
-      setMessage("Incorrect OTP.");
+      setMessage(errorMsg);
       setMessageType("error");
     }
   };
@@ -111,7 +128,7 @@ const Register = () => {
         <div className="w-1/2 hidden md:block">
           <img
             src={Registerbg}
-            alt="Fruits"
+            alt="Register"
             className="h-full w-full object-cover rounded-3xl"
           />
         </div>
@@ -146,46 +163,43 @@ const Register = () => {
               <div className="flex gap-2">
                 <input
                   type="text"
-                  name="first_name"
                   placeholder="First Name"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  className="w-1/2 border border-green-400 rounded-md px-4 py-2"
                   required
-                  className="w-1/2 border border-green-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-300"
                 />
                 <input
                   type="text"
-                  name="last_name"
                   placeholder="Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  className="w-1/2 border border-green-400 rounded-md px-4 py-2"
                   required
-                  className="w-1/2 border border-green-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-300"
                 />
               </div>
 
               <input
                 type="email"
-                name="user_email"
                 placeholder="Email Address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="w-full border border-green-400 rounded-md px-4 py-2"
                 required
-                className="w-full border border-green-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-300"
               />
+
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  name="user_password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="w-full border border-green-400 rounded-md px-4 py-2"
                   required
-                  className="w-full border border-green-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-300"
                 />
                 <span
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer select-none"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
@@ -212,9 +226,9 @@ const Register = () => {
 
               <button
                 type="submit"
-                className="w-full bg-green-600 text-white py-2 rounded-md font-semibold hover:bg-green-700 transition"
+                className="w-full bg-green-600 text-white py-2 rounded-md font-semibold hover:bg-green-700"
               >
-                Send OTP & Register
+                Send OTP
               </button>
             </form>
           ) : (
@@ -224,14 +238,14 @@ const Register = () => {
                 placeholder="Enter OTP"
                 value={enteredOtp}
                 onChange={(e) => setEnteredOtp(e.target.value)}
+                className="w-full border border-green-400 rounded-md px-4 py-2"
                 required
-                className="w-full border border-green-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
               />
               <button
                 type="submit"
-                className="w-full bg-yellow-500 text-white py-2 rounded-md font-semibold hover:bg-yellow-600 transition"
+                className="w-full bg-yellow-500 text-white py-2 rounded-md font-semibold hover:bg-yellow-600"
               >
-                Verify OTP & Complete Registration
+                Verify OTP & Register
               </button>
             </form>
           )}
